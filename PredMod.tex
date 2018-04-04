@@ -1,10 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% 
 % Dokumentinformationen % 
 %%%%%%%%%%%%%%%%%%%%%%%%% 
-\newcommand{\titleinfo}{Predective Modeling}
-\newcommand{\authorinfo}{R. Ammann, D. Wright} % Do not remove any names!
+\title{TSM\_PredMod}
+\author{R. Ammann, D. Wright} % Do not remove any names!
 % Initial authors stay first.
-\newcommand{\versioninfo}{FS2018}
+%\newcommand{\versioninfo}{FS2018}
+
+\documentclass[10pt,twoside,a4paper,fleqn]{scrartcl}
+
+
+\include{./header/zusammenfassung}
+\include{./header/hyperref}
+\include{./header/listings}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard projektübergreifender Header für
@@ -14,11 +21,11 @@
 %
 % DORT NUR ERGä„NZEN, NICHTS LÖ–SCHEN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
-\include{header}   
 
-% MÃ¶glichst keine Ergänzungen hier, sondern in header.tex
+
+% Möglichst keine Ergänzungen hier, sondern in header.tex
 \begin{document} 
-
+\selectlanguage{ngerman}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{Content/Einfuehrung_R/EinfuehrungR}
