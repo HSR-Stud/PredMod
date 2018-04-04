@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Wed Apr 04 18:53:14 CEST 2018
+markTmpDer=true
+builderNum=2
+outputDir=out/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=PredMod.tex
+outputFile=PredMod.pdf
+langSpell=en
+markDer=true
+srcDir=
