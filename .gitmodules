@@ -1,6 +1,6 @@
 [submodule "header"]
 	path = header
-	url = git@github.com:HSR-Stud/header.git
+	url = https://github.com/HSR-Stud/header.git
 [submodule "Travis"]
 	path = Travis
-	url = git@github.com:HSR-Stud/Travis.git
+	url = https://github.com/HSR-Stud/Travis.git
