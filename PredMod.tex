@@ -18,15 +18,64 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 \include{./header/zusammenfassung}
 
+\usepackage{longtable}
 
-% M�glichst keine Ergänzungen hier, sondern in header.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands for Theory and Examples % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{RExample}[3]%
+{%
+	\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+		\hline
+		\textbf{Source code:}
+			&	\textbf{Output:}\\
+		\hline
+			\vspace{0pt}
+			
+			{\lstinputlisting[style=R]{#1}}% <-- source code here
+			& 
+			\vspace{0pt}
+			
+			{\lstinputlisting[style=R]{#2}}\\% <-- output here
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Interpretation of output:}}\\
+		\hline
+		\multicolumn{2}{|l|}{#3}\\
+		\hline
+	\end{tabular}%
+	}%
+	{%
+	}
+
+\newcommand{\RTheory}[2]
+{%
+	\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+		\hline
+		\textbf{Theory}
+			& \textbf{Code Example}\\
+		\hline
+		#1% <-- Theory here
+			&
+				\vspace{0pt}
+				
+				{\lstinputlisting[style=R]{#2}}\\% <-- source code here
+		\hline
+	\end{tabular}}
+
 \begin{document} 
 \selectlanguage{ngerman}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{sections/RTutorial.tex}
 
+
+
+\input{sections/ProbabilityStatistics.tex}
+\input{sections/RegressionAnalysis.tex}
+
 \clearpage
-\input{idiotenseite/idiotenseiteInclude.tex}
+\input{idiotenseite/IdiotenseiteInclude.tex}
 
 \end{document}

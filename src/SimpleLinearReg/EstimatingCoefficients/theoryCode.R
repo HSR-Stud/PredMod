@@ -1,0 +1,1 @@
+lm(Y ~ X, data=someData)
