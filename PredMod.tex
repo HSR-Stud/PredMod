@@ -24,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Commands for Theory and Examples % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newenvironment{RExample}[3]%
+\newcommand{\RExample}[3]
 {%
 	\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
 		\hline
@@ -32,21 +32,18 @@
 			&	\textbf{Output:}\\
 		\hline
 			\vspace{0pt}
-			
-			{\lstinputlisting[style=R]{#1}}% <-- source code here
-			& 
+
+			{\lstinputlisting[style=R]{#1}}% <-- source code here (1st argument: path to source code file (.R))
+			&
 			\vspace{0pt}
-			
-			{\lstinputlisting[style=R]{#2}}\\% <-- output here
+
+			{\lstinputlisting[style=R]{#2}}\\% <-- output here (2nd argument: path to output file (.R))
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Interpretation of output:}}\\
 		\hline
 		\multicolumn{2}{|l|}{#3}\\
 		\hline
-	\end{tabular}%
-	}%
-	{%
-	}
+	\end{tabular}}
 
 \newcommand{\RTheory}[2]
 {%
@@ -55,11 +52,11 @@
 		\textbf{Theory}
 			& \textbf{Code Example}\\
 		\hline
-		#1% <-- Theory here
+		#1% <-- Theory here (1st argument: theory, entered directly in the call to the command)
 			&
 				\vspace{0pt}
-				
-				{\lstinputlisting[style=R]{#2}}\\% <-- source code here
+
+				{\lstinputlisting[style=R]{#2}}\\% <-- source code here (2nd argument: path to source code file containing a short example (.R))
 		\hline
 	\end{tabular}}
 
@@ -68,12 +65,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{sections/RTutorial.tex}
+\input{sections/RTutorial/RTutorial.tex}
 
 
 
-\input{sections/ProbabilityStatistics.tex}
-\input{sections/RegressionAnalysis.tex}
+\input{sections/ProbabilityStatistics/ProbabilityStatistics.tex}
+\input{sections/RegressionAnalysis/RegressionAnalysis.tex}
 
 \clearpage
 \input{idiotenseite/IdiotenseiteInclude.tex}
