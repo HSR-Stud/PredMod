@@ -1,3 +1,33 @@
 \subsection{Probability Models for Measurement Data}
 
 \todo{Chapter 1}
+	{
+	% Extra row height for fractions
+	\setlength{\extrarowheight}{3pt}
+
+	\begin{twoColTable}
+		\hline
+		\twoColHdrRow{Cumulative Density Function (cdf)}\\
+		\hline
+		\textbf{Definition}
+			& $F(x) = P(X \leq x)$\\
+		\hline	
+		\textbf{Properties}
+			& $P(a < X \leq b) = F(b) - F(a)$\\
+			& $0 \leq F(x) \leq 1$\\
+			& $P(X = a) = F(a) - F(a) = 0$\\
+		\hline
+		\hline
+		\twoColHdrRow{Probability Density Function (pdf)}\\
+		\hline
+		\textbf{Definition}
+			& $ f(x) = \diff{F(x)}{x}$\\[1ex] % bottom padding for fraction
+		\hline	
+		\textbf{Properties}
+			& $f(x) \geq 0$\\[1ex] % bottom padding for integral
+			& $ P(a < X \leq b) = F(b) - F(a) = \int\limits_a^b f(x)dx$\\[1ex] % bottom padding for integral
+			& $\int\limits_{-\infty}^{\infty} f(x)dx = 1$\\[1ex] % bottom padding for integral
+		\hline
+	\end{twoColTable}
+	}
+\subsubsection{}

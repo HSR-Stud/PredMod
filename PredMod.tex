@@ -19,52 +19,81 @@
 \include{./header/zusammenfassung}
 
 \usepackage{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional commands and environments for this cheat sheet % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% creates a pre-formatted two column table for arbitrary inputs 
+\newenvironment{twoColTable}
+{
+	\begin{longtable}{|p{0.475\linewidth}|p{0.475\linewidth}|}%
+	}%
+	{%
+	\end{longtable}%
+}
+
+\newcommand{\twoColHdrRow}[1]
+{%
+	\rowcolor{HSRBlue40}\multicolumn{2}{|l|}{\textbf{#1}}
+}
+
+\newcommand{\twoColHdrCell}[1]
+{%
+	\cellcolor{HSRBlue40}\textbf{#1}
+}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Commands for Theory and Examples % 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Creates a pre-formatted two column table with a code example column
+% to the left, a command line output column to the right, and an 
+% interpretation row for the command line output at the bottom
 \newcommand{\RExample}[3]
 {%
-	\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+	\begin{twoColTable}
 		\hline
-		\textbf{Source code:}
-			&	\textbf{Output:}\\
+		\twoColHdrCell{Source code:}
+			&	\twoColHdrCell{Output:}\\*
 		\hline
-			\vspace{0pt}
+		\endhead
+		\vspace{0pt}
 
-			{\lstinputlisting[style=R]{#1}}% <-- source code here (1st argument: path to source code file (.R))
+		{\lstinputlisting[style=R]{#1}}% <-- source code here (1st argument: path to source code file (.R))
 			&
 			\vspace{0pt}
 
 			{\lstinputlisting[style=R]{#2}}\\% <-- output here (2nd argument: path to output file (.R))
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Interpretation of output:}}\\
+		\twoColHdrRow{\textbf{Interpretation of output:}}\\*
 		\hline
 		\multicolumn{2}{|l|}{#3}\\
 		\hline
-	\end{tabular}}
+	\end{twoColTable}%
+}
 
+% Creates a pre-formatted two column table with a theory column
+% to the left, a code example column to the right
 \newcommand{\RTheory}[2]
 {%
-	\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+	\begin{twoColTable}
 		\hline
-		\textbf{Theory}
-			& \textbf{Code Example}\\
+		\twoColHdrCell{Theory}
+			& \twoColHdrCell{Code Example}\\*
 		\hline
+		\endhead
 		#1% <-- Theory here (1st argument: theory, entered directly in the call to the command)
 			&
 				\vspace{0pt}
 
 				{\lstinputlisting[style=R]{#2}}\\% <-- source code here (2nd argument: path to source code file containing a short example (.R))
 		\hline
-	\end{tabular}}
+	\end{twoColTable}%
+}
 
+%%%%%%%%%%%%
+% Document % 
+%%%%%%%%%%%%
 \begin{document} 
-\selectlanguage{ngerman}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{ngerman}
 \input{sections/RTutorial/RTutorial.tex}
 
 
