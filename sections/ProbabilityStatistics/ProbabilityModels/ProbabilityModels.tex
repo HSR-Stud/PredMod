@@ -1,33 +1,97 @@
 \subsection{Probability Models for Measurement Data}
 
 \todo{Chapter 1}
-	{
-	% Extra row height for fractions
-	\setlength{\extrarowheight}{3pt}
 
-	\begin{twoColTable}
-		\hline
-		\twoColHdrRow{Cumulative Density Function (cdf)}\\
-		\hline
-		\textbf{Definition}
-			& $F(x) = P(X \leq x)$\\
-		\hline	
-		\textbf{Properties}
-			& $P(a < X \leq b) = F(b) - F(a)$\\
-			& $0 \leq F(x) \leq 1$\\
-			& $P(X = a) = F(a) - F(a) = 0$\\
-		\hline
-		\hline
-		\twoColHdrRow{Probability Density Function (pdf)}\\
-		\hline
-		\textbf{Definition}
-			& $ f(x) = \diff{F(x)}{x}$\\[1ex] % bottom padding for fraction
-		\hline	
-		\textbf{Properties}
-			& $f(x) \geq 0$\\[1ex] % bottom padding for integral
-			& $ P(a < X \leq b) = F(b) - F(a) = \int\limits_a^b f(x)dx$\\[1ex] % bottom padding for integral
-			& $\int\limits_{-\infty}^{\infty} f(x)dx = 1$\\[1ex] % bottom padding for integral
-		\hline
-	\end{twoColTable}
-	}
-\subsubsection{}
+	\subsubsection{Probability Distributions}
+		{
+			% Extra row height for fractions and integrals
+			\setlength{\extrarowheight}{3pt}
+		
+			\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Cumulative Density Function (cdf)}\\
+				\hline
+				\textbf{Definition}
+					& $F(x) = P(X \leq x)$\\
+				\hline	
+				\textbf{Properties}
+					& $P(a < X \leq b) = F(b) - F(a)$\\
+					& $0 \leq F(x) \leq 1$\\
+					& $P(X = a) = F(a) - F(a) = 0$\\
+				\hline
+				\hline
+				\twoColHdrRow{Probability Density Function (pdf)}\\
+				\hline
+				\textbf{Definition}
+					& $ f(x) = \diff{F(x)}{x}$\\[1ex] % bottom padding for fraction
+				\hline	
+				\textbf{Properties}
+					& $f(x) \geq 0$\\[1ex] % bottom padding for integral
+					& $ P(a < X \leq b) = F(b) - F(a) = \int\limits_a^b f(x)\mathrm{d}x$\\[1ex] % bottom padding for integral
+					& $\int\limits_{-\infty}^{\infty} f(x)\mathrm{d}x = 1$\\[1ex] % bottom padding for integral
+				\hline
+			\end{twoColTable}
+		}
+	
+	\subsubsection{Summary Statistics of Continuous Distributions}
+		{
+			% Extra row height for fractions and integrals
+			\setlength{\extrarowheight}{3pt}
+			
+			\begin{twoColTable}
+				\hline
+				\textbf{Expected value}
+					& $\mathrm{E}(X) = \mu_X = \int\limits_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
+				\hline
+				\textbf{Variance}
+					& $\mathrm{var}(X) = \sigma_x^2 = \mathrm{E}((X - \mathrm {E}(X))^2) =  \int\limits_{-\infty}^{\infty} (x - \mathrm{E}(X))^2 \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
+				\hline
+				\textbf{Quantile}
+					& $P(X \leq q(\alpha)) = \alpha$\\
+					& $F(q(\alpha)) = \alpha$\\
+					& $q(\alpha) = F^{-1}(\alpha)$\\
+					& {\color{red}Note: When you're asked for the $50\%$-quantile, that means $\alpha = 50\%$, and you must find $q(0.5)$}\\
+				\hline
+			\end{twoColTable}
+		}
+		
+		\begin{figure}[H]\centering
+			\includegraphics[scale=1]{images/quantile.png}
+			\caption{Quantiles}
+		\end{figure}
+		
+		\subsubsection{Important Distributions}
+			\paragraph{Uniform Distribution}
+				\RTheory%
+				{%
+					$$\begin{aligned}[t]
+						f(x) 			&= 	\begin{cases}
+												\frac{1}{b - a} 	& a \leq x \leq b\\
+												0					& \mathrm{otherwise}\\ 
+											\end{cases}\\
+						F(x) 			&= 	\begin{cases}
+												0					& x < a\\
+												\frac{x-a}{b - a} 	& a \leq x \leq b\\
+												1					& x > b\\ 
+											\end{cases}\\
+						\mathrm{E}(x) 	&= \frac{a+b}{2}\\
+						\mathrm{var}(x) &= \frac{(b-a)^2}{12}\\
+					\end{aligned}$$
+				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/uniformTheory.R}
+				
+				\paragraph{Exponential Distribution}
+				\RTheory%
+				{%
+					$$\begin{aligned}[t]
+						f(x) 			&= 	\begin{cases}
+												\lambda\cdot e^{-\lambda\cdot x} 	& x \geq 0\\
+												0					& \mathrm{otherwise}\\ 
+											\end{cases}\\
+						F(x) 			&= 	\begin{cases}
+												1- \lambda\cdot e^{-\lambda\cdot x} 	& x \geq 0\\
+												0					& \mathrm{otherwise}\\ 
+											\end{cases}\\
+						\mathrm{E}(x) 	&= \frac{1}{\lambda}\\
+						\mathrm{var}(x) &= \frac{1}{\lambda^2}\\
+					\end{aligned}$$
+				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/exponentialTheory.R}
