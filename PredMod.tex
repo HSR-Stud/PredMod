@@ -35,16 +35,28 @@
 	\end{longtable}%
 }
 
+% creates a pre-formatted header row for the two column table
 \newcommand{\twoColHdrRow}[1]
 {%
 	\rowcolor{HSRBlue40}\multicolumn{2}{|l|}{\textbf{#1}}
 }
 
+% creates a pre-formatted header cell for the two column table
 \newcommand{\twoColHdrCell}[1]
 {%
 	\cellcolor{HSRBlue40}\textbf{#1}
 }
 
+% change listing caption to be consistent with the tables
+\usepackage{mdframed}
+\DeclareCaptionFont{black}{\color{black}}
+\DeclareCaptionFormat{listing}{\fcolorbox{black}{HSRBlue40}{\parbox{0.99\textwidth}{\bfseries Code example: #3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=black,textfont=black}
+% Creates a pre-formatted code listing
+\newcommand{\RCode}[2]
+{%
+	\lstinputlisting[style=R, frame=single, caption={#1}]{#2}% <-- 1st argument: caption, 2nd argument: path to source code file (.R)
+}
 
 % Creates a pre-formatted two column table with a code example column
 % to the left, a command line output column to the right, and an 
@@ -106,6 +118,8 @@
 \input{sections/RegressionAnalysis/RegressionAnalysis.tex}
 \input{sections/Classification/Classification.tex}
 \clearpage
-\input{idiotenseite/IdiotenseiteInclude.tex}
-
+\section{Idiotenseite}
+\input{idiotenseite/trigo/trigoInclude}
+\input{idiotenseite/diverses/subsections/unbestimmteIntegrale}
+\input{idiotenseite/diverses/subsections/Ableitungen}
 \end{document}
