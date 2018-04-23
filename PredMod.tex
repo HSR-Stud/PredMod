@@ -48,9 +48,8 @@
 }
 
 % change listing caption to be consistent with the tables
-\usepackage{mdframed}
 \DeclareCaptionFont{black}{\color{black}}
-\DeclareCaptionFormat{listing}{\fcolorbox{black}{HSRBlue40}{\parbox{0.99\textwidth}{\bfseries Code example: #3}}}
+\DeclareCaptionFormat{listing}{\fcolorbox{black}{HSRBlue40}{\parbox{0.985\textwidth}{\bfseries Code example: #3}}}
 \captionsetup[lstlisting]{format=listing,labelfont=black,textfont=black}
 % Creates a pre-formatted code listing
 \newcommand{\RCode}[2]
