@@ -59,6 +59,7 @@
 			\end{twoColTable}
 			\newpage
 			\begin{twoColTable}
+				\hline
 				\twoColHdrRow{Probability Density Function (pdf)}\\
 				\hline
 				\textbf{Definition}
@@ -85,7 +86,8 @@
 			\begin{twoColTable}
 				\hline
 				\textbf{Expected value}
-					& $\mathrm{E}(X) = \mu_X = \int\limits_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
+										& Discrete: $\mathrm{E}(X) = \sum\limits_{i} x_i P(X = x_i)$\\
+										& Continuous: $\mathrm{E}(X) = \mu_X = \int\limits_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
 				\hline
 				\textbf{Variance}
 					& $\mathrm{var}(X) = \sigma_x^2 = \mathrm{E}((X - \mathrm {E}(X))^2) =  \int\limits_{-\infty}^{\infty} (x - \mathrm{E}(X))^2 \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
