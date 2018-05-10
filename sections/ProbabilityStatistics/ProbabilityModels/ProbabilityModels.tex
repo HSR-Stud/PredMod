@@ -1,7 +1,4 @@
 \subsection{Probability Models for Measurement Data}
-
-\todo{Chapter 1}
-
 \subsubsection{Random Variables}
 		{
 			% Extra row height for fractions and integrals
@@ -25,7 +22,7 @@
 				\twoColHdrRow{Probability Mass Function}\\
 				\hline
 				\textbf{Definition}
-					& The probability function of a discrete random variable:\\
+					& The probability distribution of a discrete random variable:\\
 					&$P(X = x)$\\
 				\hline	
 				\textbf{Example}
@@ -85,19 +82,24 @@
 			
 			\begin{twoColTable}
 				\hline
+				\twoColHdrRow{Expected Value, Variance and Quantile}\\
+				\hline
 				\textbf{Expected value}
 										& Discrete: $\mathrm{E}(X) = \sum\limits_{i} x_i P(X = x_i)$\\
 										& Continuous: $\mathrm{E}(X) = \mu_X = \int\limits_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
 				\hline
 				\textbf{Variance}
-					& $\mathrm{var}(X) = \sigma_x^2 = \mathrm{E}((X - \mathrm {E}(X))^2) =  \int\limits_{-\infty}^{\infty} (x - \mathrm{E}(X))^2 \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
+					& $\mathrm{Var}(X) = \sigma_x^2 = \mathrm{E}((X - \mathrm {E}(X))^2) =  \int\limits_{-\infty}^{\infty} (x - \mathrm{E}(X))^2 \cdot f(x) \mathrm{d}x$\\[1ex] % bottom padding for integral
 				\hline
 				\textbf{Quantile}
 					& $P(X \leq q(\alpha)) = \alpha$\\
-					& $F(q(\alpha)) = \alpha$\\
-					& $q(\alpha) = F^{-1}(\alpha)$\\
+					& $F(q(\alpha)) = \alpha \Leftrightarrow q(\alpha) = F^{-1}(\alpha)$\\
 					& {\color{red}Note: When you're asked for the $50\%$-quantile, that means $\alpha = 50\%$, and you must find $q(0.5)$}\\
 				\hline
+				\textbf{Example Body Length}
+				& If $\alpha$=0.75 and the corresponding quantile is $q(\alpha)$=182.5cm\\
+				& then 75$\%$ of the persons is shorter or equal 182.5cm.\\
+				\hline			 
 			\end{twoColTable}
 		}
 		
@@ -121,7 +123,8 @@
 												1					& x > b\\ 
 											\end{cases}\\
 						\mathrm{E}(x) 	&= \frac{a+b}{2}\\
-						\mathrm{var}(x) &= \frac{(b-a)^2}{12}\\
+						\mathrm{Var}(x) &= \frac{(b-a)^2}{12}\\
+						\mathrm{\sigma_x} &= \frac{b-a}{\sqrt{12}}\\
 					\end{aligned}$$
 				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/uniformTheory.R}
 				
@@ -138,6 +141,66 @@
 												0					& \mathrm{otherwise}\\ 
 											\end{cases}\\
 						\mathrm{E}(x) 	&= \frac{1}{\lambda}\\
-						\mathrm{var}(x) &= \frac{1}{\lambda^2}\\
+						\mathrm{Var}(x) &= \frac{1}{\lambda^2}\\
+					    \mathrm{\sigma_x} &= \frac{1}{\lambda}\\
 					\end{aligned}$$
 				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/exponentialTheory.R}
+				\paragraph{Normal Distribution}
+				\RTheory%
+				{%
+					$$\begin{aligned}[t]
+						f(x) 			&=\frac{1}{{\sigma \sqrt {2\pi } }}e^{(- \frac{(x - \mu )^2 }{2\sigma ^2 })}\\
+						F(x) 			&= 	 \int\limits_{-\infty}^{x} f(x)\mathrm{d}y \\
+						\mathrm{E}(x) 	&= \mu \\
+						\mathrm{Var}(x) &=\sigma^2 \\
+					    \mathrm{\sigma_x} &= \sigma\\
+					\end{aligned}$$
+				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/gaussianTheory.R}
+				\paragraph{Linear Transformation of Random Variables}
+				{
+			% Extra row height for fractions and integrals
+			\setlength{\extrarowheight}{3pt}
+		
+			\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Properties of Linear Transformation of a Random Variable}\\
+				\hline
+				\textbf{Definition}
+					& For $ Y=a+bX$ the following apply\\
+					&   (i) $E(Y)= a+bE(X)$\\
+					&  (ii) $Var(Y)= b^2Var(X), \, \sigma_Y = |b|\sigma_X$\\
+					& (iii) $\alpha-Quantile\,of\,Y = q_Y(\alpha) = a+bq_X(\alpha)$\\
+					&  (iv) $f_Y(y) = \frac{1}{b}f_X(\frac{y-a}{b})$\\
+				\hline
+				\hline
+				\twoColHdrRow{Summary Statistics of $S_n$ and $\bar{X}_n$}\\
+				\hline
+				\textbf{Summary Statistics of Sample Total $S_n$}
+					& $E(S_n)=E(X_1+X_2+...+X_n)=\sum\limits_{i=1}\limits^{n}E(X_i)=n\mu$\\
+					& $Var(S_n)=\sum\limits_{i=1}\limits^{n}Var(X_i)=nVar(X_i)$\\
+					& $\sigma(S_n)=\sqrt{n}\sigma_X$\\
+				\hline	
+				\textbf{Summary Statistics of Sample Mean $\bar{X}_n$}
+					& $E(\bar{X}_n)=E(\frac{X_1+X_2+...+X_n}{n})=\frac{1}{n}\sum\limits_{i=1}\limits^{n}E(X_i)=\frac{1}{n}nE(X_i)=\mu$\\
+					& $ Var(\bar{X}_n)=\frac{1}{n^2}\sum\limits_{i=1}\limits^{n}Var(X_i)=\frac{1}{n^2}n\sigma_{X}^{2}=\frac{\sigma_{X}^{2}}{n}$\\
+				\textit{Standard Error}
+					& $\sigma(\bar{X}_n)=\frac{\sigma_X}{\sqrt{n}} $ \\
+				\hline	
+			\end{twoColTable}
+		}
+		\paragraph{Distributions of $S_n$ and $\bar{X}_n$}
+				\RTheory%
+				{%
+				 1. For  $X_i \in \{ 0,1 \}$, we have
+				 \begin{center}
+				 $S_n \sim $Bin$(n,\pi)$ with $\pi = P(X_i=1)$\\
+				 \end{center}
+				 2. For $X_i \sim$Pois$(\lambda)$, we have
+				 \begin{center}
+				  $S_n \sim$Pois$(n\lambda)$\\
+				 \end{center}				 
+				 3. For $X_i \sim N(\mu,\sigma^2)$
+				 \begin{center}
+				  $S_n \sim N(n\mu,n\sigma^2)$ and $\bar{X}_n \sim N(\mu, \frac{\sigma_{X}^{2}}{n})$\\
+				 \end{center}				 
+				}{sections/ProbabilityStatistics/ProbabilityModels/ImportantDistributions/centralLimitTheorem.R}
