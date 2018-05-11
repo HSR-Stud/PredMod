@@ -1,3 +1,203 @@
 \subsection{Statistics for Measurement Data}
 
 \todo{Chapter 2}
+
+\subsubsection{Assess the Normal Distribution Assumption}
+{
+		\paragraph{Q-Q Plot}
+				\RTheory%
+				{%
+				1. For
+				 \begin{center}
+				 $\alpha_k=\frac{k-0.5}{n}$ with $k=1,...,n$\\
+				 \end{center}
+				 calculate the corresponding theoretical quantiles of the model distribution
+				 \begin{center}
+				  $q(\alpha_k)=F^{-1}(\alpha_k)$\\
+				 \end{center}				 
+				 2. Determine the empirical $\alpha_k$-quantiles,
+				 \begin{center}
+				  $x_{(1)}<x_{(2)}<...<x_{(n)}$\\
+				 \end{center}				 
+				3. Plot the empirical quantiles $x_k$ on the y-axis against the theoretical quantiles 					$q(\alpha_k)$ on the x-axis.		 
+				}
+				{
+				sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/QQPlot.R
+				}
+\begin{figure}[H]
+\begin{minipage}[c]{0.5\textwidth}
+    \includegraphics[width=1\linewidth]{images/qqPlot.png}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \includegraphics[width=1\linewidth]{images/qqNormLine.png}
+  \end{minipage}\\
+  \begin{minipage}[t]{.5\textwidth}
+    \subcaption{qqplot()}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{.5\textwidth}
+    \subcaption{qqnorm();qqline()}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+	  \begin{minipage}[c]{0.5\textwidth}
+   			\includegraphics[width=1\linewidth]{images/qqList.png}
+	  \end{minipage}
+	  	  	  \begin{minipage}[c]{0.5\textwidth}
+   			\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/QQList.R}
+	  \end{minipage}
+	  	\end{figure}
+}
+\subsubsection{Parameter Esitmation for Continuous Probability Distributions}
+{
+		% Extra row height for fractions and integrals
+			\setlength{\extrarowheight}{3pt}
+		
+			\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Method of Moments (not unbiased)}\\
+				\hline
+				1. We consider our data measurements $x_1,x_2,...,x_n$ as realization of random 							variables $X_1,X_2,...,X_n$ originating from the same known distribution.
+				& $\mu = E(X)  \Rightarrow \hat{\mu}=\bar{x}_n=\frac{x_1+x_2+...+x_n}{n} = \frac{653.3}{20} = 32.7 \break \break \sigma^2 = E(X^2)-E(X)^2 = E(X^2)-\mu^2$\\
+				2. We calculate the expected value $E(X)$ and solve the equation for the unknown 							parameter that we intend to estimate.
+				& $\hat{\mu}^2+\hat{\sigma}^2 = \frac{1}{n}\sum\limits_{i=1}\limits^n x_i^2$ \vfill
+				$\hat{\sigma}^2 = \frac{\sum\limits_{i=1}\limits^n(x_i-\bar{x}_n)^2}{n}$\\
+				3. We replace the expected value with its counterpart, the empirical mean value and 						obtain an estimate of the unknown parameter. A method of moments estimate of the 						standard deviation is the empirical standard deviation.
+				&$\hat{\sigma}^2 = \sqrt{\frac{1}{n}\sum\limits_{i=1}\limits^n(x_i-\hat{\mu})^2}=\sqrt{\frac{1}{20}\sum\limits_{i=1}\limits^{20}(x_i-32.7)^2}=4.04$\\
+				\hline	
+				\hline
+			\end{twoColTable}
+			\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Method of Maximum Likelihood}\\
+				\hline
+				We have $n$ observations that are i.i.d.
+				&$X_1=x_1,X_2=x_2,...,X_n=x_n$\\
+				For a discrete probability distribution: probability that these $n$ observations
+				(events) actually have occurred can be expressed as follows
+				&$P[(X_1=x_1)\cap (X_2=x_2)\cap ... \cap (X_n=x_n)]=$ \vfill $P[X_1=x_1]\cdot P[X_2=x_2]\cdot ... \cdot P[X_n=x_n] = \prod\limits_{i=1}\limits^n P[X_i = x_i]$ \\
+				Probability that the $n$ independent random variables $x_1, x_2, . . . , x_n$ are
+observed, depends on parameter $\theta$, which we wish to estimate. Therefore the Likelihood function is given by $L(\theta)$ where $P[X_i = x_i|\theta]$ denotes probability mass function that value $x_i$ has been observed, given the parameter value $\theta$.
+				& $L(\theta) = P[X_1=x_1|\theta]\cdot P[X_2=x_2|\theta]\cdot ... \cdot P[X_n=x_n|\theta] = \prod\limits_{i=1}\limits^n P[X_i = x_i|\theta]$ \\
+				Idea of Maximum Likelihood : estimate the parameter $\theta$ in such a way that
+the likelihood is maximized, that is, that it makes the observed data most likely or most probable.
+				&\\
+				Continuous probability distributions : with probability density function $f(x;\theta)$. Probability, that each observation $x_i$ falls into its corresponding interval $[x_i , x_i + dx_i]$:
+				&$\prod\limits_{i=1}\limits^n f(x_i; \theta)dx_i$\\
+				Infinitesimal intervals $dx_i$ do not depend on the parameter value $\theta$ : we omit
+them in the likelihood function
+				&$\prod\limits_{i=1}\limits^n f(x_i; \theta)$\\
+				If assumed probability density function $f(x_i; \theta)$ and parameter value of $\theta$ are correct, we expect a high probability for the actually observed data to occur :
+maximization of $L(\theta)$\\
+				\hline
+				\hline
+				\twoColHdrRow{Example: Maximum Likelihood for Exponential Distribution}\\
+				\hline
+				Let $X_1, X_2 . . . , X_n$ i.i.d. $\sim$ Exp($\lambda$), that is
+				& $f(x_i; \lambda) = \lambda e^{-\lambda x_i}$\\
+				\hline
+				Likelihood function for a given data set $x_1, x_2, . . . , x_n$ is given by
+				& $L(\lambda) = \prod\limits_{i=1}\limits^n \lambda e^{-\lambda x_i}$\\
+				\hline
+				Log likelihood function is
+				& $\log(L(\lambda)) = n \log(\lambda) - \lambda \sum\limits_{i=1}\limits^n x_i$\\
+				\hline
+				If we calculate the derivative of the log likelihood function with respect to $\lambda					$ and set it equal to 0, then we obtain
+				& $\frac{d \log(L(\lambda))}{d\lambda}=\frac{n}{\lambda}-\sum\limits_{i=1}\limits^n x_i \overset{!}{=} 0$\\
+				\hline
+				The maximum likelihood estimate $\hat\lambda$ thus corresponds to the solution of the previous equation
+				& $\hat\lambda = \frac{n}{\sum\limits_{i=1}\limits^n x_i}=\frac{1}{\bar{x}}$\\
+				\hline	
+			\end{twoColTable}
+}
+\subsubsection{Statistical Tests and Confidence Interval for Normally Distributed Data}
+{
+% Extra row height for fractions and integrals
+\setlength{\extrarowheight}{3pt}
+		
+\begin{twoColTable}
+		\hline
+		\twoColHdrRow{$z$-Test ($\sigma_x$ known)}\\
+		\hline
+				1. Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ known\\
+		\hline	
+				2. Null hypothesis:
+				& $H_0$:	$\mu=\mu_0$\\
+				Alternative:
+				& $H_A$:	$\mu \neq \mu_0$	(or $<$ or $>$)\\
+		\hline	
+				3. Test statistic:
+				& $Z=\frac{(\bar{X}_n - \mu_0)}{\sigma_{\bar{X}_n}}=\frac{(\bar{X}_n - \mu_0)}{\sigma_{X_n}/\sqrt{n}}=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\sigma_{X_n}}=\frac{observed-expected}{standard\,error}$\\
+				Null distribution (assuming $H_0$ is true):
+				&$Z \sim N(0,1)$\\
+		\hline
+				4. Significance level:
+				& $\alpha$\\
+		\hline
+				5. Rejection region for the test statistic:
+				& $K=(-\infty,z_{\frac{\alpha}{2}}] \cup [z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$, \vfill 
+				$K=(-\infty,z_{\frac{\alpha}{2}}]$ with $H_A: \mu < \mu_0$, \vfill
+				$K=[z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu > \mu_0$\\
+				where
+				& $z_{\frac{\alpha}{2}} = \Phi^{-1}(\alpha/2)$\\
+	\hline
+				6. Test decision:
+				& Check whether the observed value of the test statistic falls into the rejection region.\\
+	\hline
+\end{twoColTable}
+\begin{figure}[H]
+    \includegraphics[width=1\linewidth]{images/zTestDecision.png}
+\end{figure}
+\begin{twoColTable}
+		\hline
+		\twoColHdrRow{$z$-Test ($\sigma_x$ known): Example}\\
+		\hline
+				Measurement of fusion heat:
+				& The empirical mean value of $n=13$ measurements is $80.02$. From previous measurements the standard deviation is $\sigma_X = 0.01$. Is a fusion heat of exactly $80.00\frac{g}{cal}$ plausible?\\
+		\hline
+				1. Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X=0.01$ known, $n=13$\\
+		\hline	
+				2. Null hypothesis:
+				& $H_0$:	$\mu=\mu_0=80.00$\\
+				Alternative:
+				& $H_A$:	$\mu \neq \mu_0$\\
+		\hline	
+				3. Test statistic:
+				& $Z=\frac{\sqrt{n}\bar{X}_n - \mu_0)}{\sigma_{X_n}}$\\
+				Null distribution (assuming $H_0$ is true):
+				&$Z \sim N(0,1)$\\
+		\hline
+				4. Significance level:
+				& $\alpha = 0.05$ (commonly used $\alpha$-level)\\
+		\hline
+				5. Rejection region for the test statistic:
+				& $K=(-\infty,z_{\frac{\alpha}{2}}] \cup [z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$\\
+				Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest.R}}\\
+				The following rejection region for the test statistic results
+				& $z_{\frac{\alpha}{2}} = \Phi^{-1}(\alpha/2) = \Phi^{-1}(0.025)=-1.96$ \vfill
+				$K=(-\infty,-1.96] \cup [1.96, \infty)$ \\
+		\hline
+				6. Test decision:
+				&Hence the value for the statistics is\\
+				&$z=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\sigma_{X_n}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.01}=7.211$\\
+				\textbf{Remarks:} Standardizing is in principle unnecessary because of technical aid of computer software.
+				&Therefore the observed value falls into the rejection region.\\
+		\hline	
+				3. Test statistic: (not standardized) 
+				& The mean value of the measurements\\
+				&$T$: $\bar{X}_n$\\
+				Null distribution (assuming $H_0$ is true):
+				&$T\sim N(\mu_0,\frac{\sigma_{X}^{2}}{n}) = N(80,\frac{0.01^2}{13})$\\	
+		\hline
+				5. Rejection region for the test statistic: (not standardized) 
+				& $K=(-\infty,c_u] \cup [c_o, \infty)$ with $H_A: \mu \neq \mu_0$\\
+				Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest2.R}}\\
+				In this way, we obtain the rejection region tor the test statistic:
+				&$K=(-\infty,79.99] \cup [80.01, \infty)$ \\	
+		\hline
+		
+\end{twoColTable}
+}
