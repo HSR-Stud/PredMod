@@ -1,8 +1,5 @@
 \subsection{Statistics for Measurement Data}
-
-\todo{Chapter 2}
-
-\subsubsection{Assess the Normal Distribution Assumption}
+ bgg\subsubsection{Assess the Normal Distribution Assumption}
 {
 		\paragraph{Q-Q Plot}
 				\RTheory%
@@ -136,8 +133,8 @@ maximization of $L(\theta)$\\
 		\hline
 				5. Rejection region for the test statistic:
 				& $K=(-\infty,z_{\frac{\alpha}{2}}] \cup [z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$, \vfill 
-				$K=(-\infty,z_{\frac{\alpha}{2}}]$ with $H_A: \mu < \mu_0$, \vfill
-				$K=[z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu > \mu_0$\\
+				$K=(-\infty,z_\alpha]$ with $H_A: \mu < \mu_0$, \vfill
+				$K=[z_{1-\alpha}, \infty)$ with $H_A: \mu > \mu_0$\\
 				where
 				& $z_{\frac{\alpha}{2}} = \Phi^{-1}(\alpha/2)$\\
 	\hline
@@ -145,9 +142,11 @@ maximization of $L(\theta)$\\
 				& Check whether the observed value of the test statistic falls into the rejection region.\\
 	\hline
 \end{twoColTable}
+
 \begin{figure}[H]
     \includegraphics[width=1\linewidth]{images/zTestDecision.png}
 \end{figure}
+
 \begin{twoColTable}
 		\hline
 		\twoColHdrRow{$z$-Test ($\sigma_x$ known): Example}\\
@@ -200,4 +199,113 @@ maximization of $L(\theta)$\\
 		\hline
 		
 \end{twoColTable}
+
+\begin{twoColTable}
+		\hline
+		\twoColHdrRow{$t$-Test ($\sigma_x$ unknown)}\\
+		\hline
+				1. Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated by $						\hat{\sigma}_X$\\
+		\hline	
+				2. Null hypothesis:
+				& $H_0$:	$\mu=\mu_0$\\
+				Alternative:
+				& $H_A$:	$\mu \neq \mu_0$	(or $<$ or $>$)\\
+		\hline	
+				3. Test statistic:
+				& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{observed-expected}						{estimated\,\,standard\,\,error}$\\
+				Null distribution (assuming $H_0$ is true):
+				&$T \sim t_{n-1}$\\
+		\hline
+				4. Significance level:
+				& $\alpha$\\
+		\hline
+				5. Rejection region for the test statistic:
+				& $K=(-\infty,t_{n-1;\frac{\alpha}{2}}] \cup [t_{n-1;1-\frac{\alpha}{2}}, \infty)$ 						with $H_A: \mu \neq \mu_0$, \vfill 
+				$K=(-\infty,t_{n-1;\alpha]}$ with $H_A: \mu < \mu_0$, \vfill
+				$K=[t_{n-1;1-\alpha}, \infty)$ with $H_A: \mu > \mu_0$\\
+	\hline
+				6. Test decision:
+				& Check whether the observed value of the test statistic falls into the rejection region.\\
+	\hline
+	\twoColHdrRow{Example}\\
+		\hline
+				1. Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated, $\hat{\sigma}_X=0.024$\\
+		\hline	
+				2. Null hypothesis:
+				& $H_0$:	$\mu=\mu_0=80.00$\\
+				Alternative:
+				& $H_A$:	$\mu \neq \mu_0$\\
+		\hline	
+				3. Test statistic:
+				& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}$\\
+				Null distribution (assuming $H_0$ is true):
+				&$T \sim t_{n-1}$\\
+		\hline
+				4. Significance level:
+				& $\alpha = 0.05$\\
+		\hline
+				5. Rejection region for the test statistic:
+				& $K=(-\infty,t_{n-1;\frac{\alpha}{2}}] \cup [t_{n-1;1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$,\\
+				We determine the value
+				& $t_{n-1;1-\frac{\alpha}{2}}=t_{12;0.975}=2.179$\\
+				by means of {\color{blue}R}, where $\alpha =0.05$ and $n=13$.
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest.R}}\\
+				The rejection region of the test statistic thus is given by
+				& $K=(-\infty,-2.179] \cup [2.179, \infty)$\\
+	\hline
+				6. Test decision:
+				& On the basis of $n=13$ measurements, we find\\
+				&$\bar{x}=80.02$ and $\hat{\sigma}_X=0.024$\\
+				&Hence, the realized value of the test statistic is\\
+				&$t=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.024}=3.00$\\
+				&The observed value falls into the rejection region. Therefore, the null hypothesis is rejected at 5$\%$ level.\\
+	\hline
+	The $t$-test directly performed in {\color{blue}R} using the function {\color{blue}t.test()}
+	\vfill
+	\vspace*{0.5cm}
+\textbf{Remarks:}\vfill
+(i) The observed value of the test statistic is $3.12$. Assuming the null hypothesis is true, then the test statistic follows a $t$-distribution with $df = 12$ degrees of
+freedom. \vfill
+\vspace*{0.5cm}
+(ii) The observed mean value of the data is $80.02$. A $95\%$ confidence interval for the true mean is $[80.006, 80.035]$.\vfill
+\vspace*{0.5cm}
+(iii) The {\color{blue}R} functions {\color{blue}qt(p,df)} calculates the quantile from the probability density and the degrees of freedom and {\color{blue}pt(q,df)} calculates the probabilty density from the quantile and the degrees of freedom.\vfill
+\vspace*{0.5cm}
+(iv) The \textbf{confidence interval} for measurement data consists of the values µ, for which the
+corresponding statistical test does not reject the null hypothesis. 
+
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest2.R}}\vspace*{0.1cm}{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest3.R}}\\ 
+				\hline
+\twoColHdrRow{$P$-Value}\\
+\hline
+The $p$-value is the probability that the test statistic will take on a value that is at least as extreme (with respect to the alternative hypothesis) as the observed value of the statistic when the null hypothesis $H_0$ is true.
+& For the one-sided alternative hypothesis $H_A$: $\mu > \mu_0$, the $p$-value can be calculated as follows - the observed value of the statistics is $t=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=3.1246$:\vfill 
+\vspace*{0.2cm}
+$p$-value$ = P(T>t)=P(T>3.1246)=0.00439$
+\vspace*{0.2cm}
+For the two-sided alternative hypothesis $H_A$: $\mu \neq \mu_0$, the $p$-value can be calculated
+as follows (the observed value of the test statistics is $t=\frac{\sqrt{n}|\bar{X}_n - \mu_0|}{\hat{\sigma}_{X}})$:\vfill
+\vspace*{0.2cm}
+$p$-value$ = 2 \cdot P(T>|t|)$
+\\
+In {\color{blue}R} we compute the one-sided and the two sided $p$-value as follows:\vfill
+\vspace*{0.5cm}
+These p-values are evidence against the null hypothesis at 5$\%$ level. Whereas the two-sided value is statistically significant at the 5$\%$ value.
+& {\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/pValue.R}}\\
+\hline
+\textbf{$p$-value and Statistical Test}\vfill
+1. Reject $H_0$ if $p$-value$ \leq \alpha$ \vfill
+2. Retain $H_0$ if $p$-value$ > \alpha$ \vfill
+\textit{The p-value is the smallest level of significance that would lead to rejection of the null hypothesis $H_0$ with the given data.}
+& The $p$-value quantifies how significant an alternative is: \vfill
+$p$-value $\approx 0.05$ : weakly significant, "."\vfill
+$p$-value $\approx 0.01$ : weakly significant, "*"\vfill
+$p$-value $\approx 0.001$ : weakly significant, "**"\vfill
+$p$-value $\leq 10^{-4}$ : weakly significant, "***"\\
+\hline
+\end{twoColTable}
+
+
 }
