@@ -1,3 +1,159 @@
 \subsection{Joint Distributions}
 
 \todo{Chapter 3}
+\subsubsection{Joint, Marginal and Conditional Distributions}
+{
+			\setlength{\extrarowheight}{3pt}
+		
+			\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Discrete Joint Probability Distribution}\\
+				\hline
+				The \textbf{Joint Probability Distribution} of $X$ and $Y$ is defined by the following distributions:
+					& $P(X=x, Y=y)$, $x \in W_x,y \in W_y$\\
+				\hline	
+				\textbf{Marginal Distributions} are single distributions $P(X=x)$ of $X$ and $P(Y=y)$ of $Y$. They can be calculated based on their joint distribution:
+				& $P(X=x)=\sum\limits_{y \in W_y} P(X=x,Y=y)$, $x \in W_x$\\
+				Joint distribution of $(X,Y)$ starting from the marginal distribution of $X$ and $Y$ is only possible for \textbf{independent} $X$ and $Y$. Then it holds:
+				& $P(X=x, Y=y)=P(X=x) \cdot P(Y=y)$, $x \in W_x,y \in W_y$\\	
+				\hline	
+				\textbf{Conditional probability} of $X$ given $Y=y$ is defined as:
+				& $P(X=x|Y=y)=\frac{P(X=x,Y=y)}{P(Y=y}$\\
+				The \textbf{marginal distributions} then can be expressed as follows:
+				& $P(X=x)=\sum\limits_{y \in W_y} P(X=x|Y=y)P(Y=y)$, $x \in W_x$\\
+				\hline
+				\textbf{Conditional Expected Value} of $Y$ given $X=x$ is defined as:
+				& $E[Y|X=x]=\sum\limits_{y \in W_y} y \cdot P(Y=y|X=x)$\\	
+				\hline
+				\hline
+				\twoColHdrRow{Example}\\
+				\hline
+				\vspace*{1cm}
+\centering \includegraphics[width=1\linewidth]{images/tableJointDist.png}
+				& $P(X=3, Y=4)=0.030$ or $P(X=3 \cup Y=4)=0.030$\vfill
+				\vspace*{0.3cm}
+				  $P(X=3) = P(X=3, Y=1)+P(X=3, Y=2)+$ \vfill $P(X=3, Y=3)+P(X=3, Y=4) = $\vfill
+				  $0.030+0.060+0.180+0.030=0.300$\vfill
+				\vspace*{0.3cm}
+				$P(Y=2|X=4)=\frac{P(Y=2,X=4)}{P(X=4)}=\frac{0.002}{0.1}=0.02$					\vfill
+				\vspace*{0.3cm} 
+				$P(X=Y)= P(X=1, Y=1)+P(X=2, Y=2)+$ \vfill $P(X=3, Y=3)+P(X=4, Y=4) = 0.700$\vfill
+				\vspace*{0.3cm}
+				If random variables are independent it must hold that \vfill
+				{$P(X=x, Y=y)=P(X=x) \cdot P(Y=y)$}\vfill
+				From the marginal distribution follows \vfill				
+				{$P(X=1) \cdot P(Y=2) = 0.100 \cdot 0.427 = 0.043$}			\vfill
+				and this is not equal to\vfill
+				{$P(X=1, Y=2)= 0.15$}\vfill
+				$X$ and $Y$ are \textbf{not independent}\\ 
+				\hline
+\end{twoColTable}
+
+\begin{twoColTable}
+				\hline
+				\twoColHdrRow{Joint Density Function}\\
+				\hline
+				The \textbf{probability} that the \textbf{joint random variable} ($X$,$Y$) lies in a two-dimensional region A, i.e., $A \subset \mathbb{R}^2$, is given by
+& $P((X,Y)\in A) = \iint\limits_A f_{X,Y}(x,y)dx\,dy$ \\
+The (bivariate) \textbf{joint density function} needs to satisfy& $ \iint\limits_{\mathbb{R}} f_{X,Y}(x,y)dx\,dy = 1$\\
+$X$ and $Y$ are only \textbf{independent} if
+& $f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y)$, $x,y \in \mathbb{R}$\\
+\hline
+\textbf{Marginal Density}
+& $f_X(x)= \int\limits_{-\infty}^{\infty} f_{X,Y}(x,y) dy$, $f_Y(y)= \int\limits_{-\infty}^{\infty} f_{X,Y}(x,y) dx$\\
+\hline
+\textbf{Conditional Probability}
+& $f_{Y|X=x}(y)=f_Y(y|X=x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)}$\\
+$X$ and $Y$ are only independent if the following apply:
+&$f_{Y|X=x}(y) = f_Y(y)$ resp. $f_{X|Y=y}(x) = f_X(x)$\\
+\hline
+\textbf{Conditional Expected Value} of a continuous random variable $Y$ given $X=x$
+& $E[Y|X=x]= \int\limits_{-\infty}^{\infty} y \cdot f_{Y|X=x}(y)dy$
+\\
+\hline
+\twoColHdrRow{Example}\\
+\hline
+Two machines with exponentially distributed life expectancy $X \sim Exp(\lambda_1)$ and $Y \sim Exp(\lambda_2)$, where $X$ and $Y$ are independent. \vfill
+$f_X(x) = \lambda_1 e^{-\lambda_1 x}$ and $f_Y(y) = \lambda_2 e^{-\lambda_2 y}$ \vfill
+\vspace*{0.3cm}
+\centering \includegraphics[width=0.5 \linewidth]{images/integrationJointDensityFct.png}
+& Due to independence:\vfill
+$_{X,Y}(x,y)= \lambda_1 e^{-\lambda_1 x}\lambda_2 e^{-\lambda_2 y}$\vfill
+\vspace*{2cm}
+$P(Y<X)= \int\limits_0 \limits^{\infty} (\int\limits_0 \limits^{x} \lambda_1 e^{-\lambda_1 x}\lambda_2 e^{-\lambda_2 y} dy)dx$ \vfill
+$P(Y<X)= \int\limits_0 \limits^{\infty}  \lambda_1 e^{-\lambda_1 x} (1-e^{-\lambda_2 y})dx = \frac{\lambda_2}{\lambda_1 + \lambda_2}$\\
+\hline
+\end{twoColTable}
+}
+\subsubsection{Covariance and Correlation}
+{
+\setlength{\extrarowheight}{3pt}
+		
+\begin{twoColTable}
+			\hline
+			\twoColHdrRow{Covariance and Correlation}\\
+			\hline
+			\textbf{Covariance}
+			& $Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]= E[XY]-E[X]E[Y]$\\
+			$X,Y$ independent
+			& $E[XY]=E[X]E[Y]$\\
+			& $Cov(X,X)=E[(X-\mu_X)(X-\mu_X)] =E[(X-\mu_X)^2] = Var(X) $\\
+			Sum of Variances
+			& $Var(\sum\limits_{i=1}\limits^{n} X_i)=Cov(\sum\limits_{i=1}\limits^{n} X_i,\sum\limits_{i=1}\limits^{n} X_i)= \sum\limits_{i=1}\limits^{n}Var(X_i)+2\sum\limits_{i<j}\limits^{n} Cov(X_i,X_j)$\\
+			2 Random Variables
+			& $Var(X+Y)=Cov(X+Y,X+Y)=Var(X)+Var(Y)+2Cov(X,Y)$\\
+			If all $X_i$ are independent
+			& $Var(X_1 +X_2 +...+X_n)=Var(X_1)+...+Var(X_n)$\\
+			\hline
+			\textbf{Correlation}
+			& $ Cor(X,Y) = \rho_{XY} = \frac{Cov(X,Y}{\rho_X \rho_Y}$ where $-1 \leq Cor(X,Y) \leq 1$\\
+			Measure for strength and direction of the \textit{linear dependency} between $X$ and $Y$.
+			& $Cor(X,Y)=+1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b>0$ \vfill
+			$Cor(X,Y)=-1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b<0$ 
+			\\
+			&$|Cor(X,Y)| = 1$ means perfect linear relationship between $X$ and $Y$.\\
+			&$Cor(X,Y) = 0$ means $X$ and $Y$ are uncorrelated.\\
+			$X$ and $Y$ \textbf{linear independent}
+			& $Cor(X,Y) = 0$ (and thus $Cov(X,Y)=0)$\\
+			\hline
+\end{twoColTable}
+		\begin{figure}[H]\centering
+			\includegraphics[scale=1]{images/Correlation.png}
+			\caption{Correlations}
+		\end{figure}
+}
+\subsubsection{Bivariate Normal Distribution}
+{
+\begin{twoColTable}
+			\hline
+			\twoColHdrRow{Bivariate Normal Distribution}\\
+			\hline
+			Expected values and variances of the marginal distribution
+			& $\mu_X, \sigma_X^2$ and $\mu_Y, \sigma_Y^2$\\
+			Covariance between $X$ and $Y$
+			& $Cov(X,Y)=\rho_{XY}\sigma_X\sigma_Y$\\
+			\hline
+			Joint Density
+			& $f_{X,Y}(x,y)=$\\
+			&$\frac{1}{2\pi\sqrt{det(\sum)}}exp\bigg(-\frac{1}{2}(x-\mu_X,y-\mu_Y)\sum^{-1}				\begin{pmatrix}
+				x-\mu_X\\
+				y-\mu_Y\\
+			\end{pmatrix}\bigg)$\\
+			\hline
+			Covariance Matrix
+			& $\sum = \begin{pmatrix}
+			Cov(X,X) & Cov(X,Y)\\
+			Cov(Y,X) & Cov(Y,Y)\\
+			\end{pmatrix}
+			= 
+			\begin{pmatrix}
+			\sigma_X^2 & \rho_{XY}\sigma_X\sigma_Y\\
+			\rho_{XY}\sigma_X\sigma_Y & \sigma_Y^2)\\
+			\end{pmatrix}$\\
+			\hline
+\end{twoColTable}
+}
+\subsubsection{Principal Component Analysis (PCA)}
+{
+
+}
