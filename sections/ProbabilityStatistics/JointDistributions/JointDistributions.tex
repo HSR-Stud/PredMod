@@ -1,6 +1,5 @@
 \subsection{Joint Distributions}
 
-\todo{Chapter 3}
 \subsubsection{Joint, Marginal and Conditional Distributions}
 {
 			\setlength{\extrarowheight}{3pt}
@@ -148,12 +147,154 @@ $P(Y<X)= \int\limits_0 \limits^{\infty}  \lambda_1 e^{-\lambda_1 x} (1-e^{-\lamb
 			= 
 			\begin{pmatrix}
 			\sigma_X^2 & \rho_{XY}\sigma_X\sigma_Y\\
-			\rho_{XY}\sigma_X\sigma_Y & \sigma_Y^2)\\
+			\rho_{XY}\sigma_X\sigma_Y & \sigma_Y^2\\
 			\end{pmatrix}$\\
 			\hline
 \end{twoColTable}
 }
 \subsubsection{Principal Component Analysis (PCA)}
 {
+PCA is a popular approach for deriving a low-dimensional set of features from a large set of variables. PCA is a technique for reducing the dimension of a $n$ x $p$ data matrix $X$ where $n$ corresponds to the number of observations and $p$ to the number of  variables.
+\paragraph{Example: USArrests}
+\begin{figure}[H]\centering
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=1\linewidth]{images/USArrests_PCA.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=1\linewidth]{images/USArrests_PCA2.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{.5\textwidth}
+	\subcaption{The data vary the most along the first principal component}
+\end{minipage}\hfill
+\begin{minipage}[t]{.5\textwidth}
+	\subcaption{Counter Clockwise Rotation that 1. PC coincides with x-axis}
+\end{minipage}
+\caption{1st and 2nd Principal Component}
+\end{figure}
+
+\begin{figure}[H]\centering
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=1\linewidth]{images/USArrests_PCA3.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=1\linewidth]{images/USArrests_PCA4.png}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.5\textwidth}
+		\subcaption{$z_{i1}$ versus Murder}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.5\textwidth}
+		\subcaption{$z_{i1}$ versus Assault}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]\centering
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=1\linewidth]{images/USArrests_PCA5.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=1\linewidth]{images/USArrests_PCA6.png}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.5\textwidth}
+		\subcaption{$z_{i2}$ versus Murder}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.5\textwidth}
+		\subcaption{$z_{i2}$ versus Assault}
+	\end{minipage}
+\caption{The fact that the 2nd principal component scores are much closer to zero indicates that this component captures far less information as the 1st principal component.}
+\end{figure}
+\RTheory
+{	$Z_1=-0.0419126$(Murder - $\overline{\mbox{Murder}})-0.9991213$(Assault-$\overline{\mbox{Assault}})$
+	\newline
+	\newline
+$\phi_{11} = - 0.00419126$ and $\phi_{21} = -0.9991213$ are the \textit{principal component loadings}
+\newline
+\newline
+The idea is that every that out of every linear combination of Murder and Assault sucht that% 
+$$\phi_{11}^2+\phi_{21}^2 = 1$$
+and \vfill
+$$Var(\phi_{11})(\mbox{Murder}-\overline{\mbox{Murder}})+\phi_{21}(\mbox{Assault}-\overline{\mbox{Assault}})$$
+is maximized. 
+\newline
+\newline
+{\color{blue}prcomp()} centers the variables to have mean zero. This corresponds to how the first principal component is defined.
+\newline
+\newline
+$z_{i1}=-0.0419126$(Murder - $\overline{\mbox{Murder}})-0.9991213$(Assault-$\overline{\mbox{Assault}})$
+\newline
+\newline
+The values of $z_{i1},...,z_{n1}$ are known as \textit{principal component scores}, seen in the right-hand panel in Figure 6. $z_{i1} > 0$ indicates a state with below-average arrests for murder and below average for assault. A negative score suggests the opposite.
+\newline
+\newline
+	$Z_2=0.9991213$(Murder - $\overline{\mbox{Murder}})-0.0419126$(Assault-$\overline{\mbox{Assault}})$
+ }
+	{sections/ProbabilityStatistics/JointDistributions/RCode/USArrests_prcomp.R}
+
+	With two-dimensional data, such as in our USArrests example, we can construct at most two principal components. However, if we had other variables, such as Rape, then additional components could be constructed.
+	
+	\paragraph{PCA and Covariance Matrix}
+	{The covariance matrix of two random variables $X$ and $Y$ is defined as 
+		$$\sum = 
+		\begin{pmatrix}
+		Cov(X,X) & Cov(X,Y) \\
+		Cov(Y,X) & Cov(Y,Y) \\
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+		\sigma_X^2 & Cov(X,Y) \\
+		Cov(Y,X) & \sigma_Y^2 \\
+		\end{pmatrix}
+	 $$	
+	Since $Z_1$ and $Z_2$ are required to be uncorrelated, this implies for their covariance matrix $\sum$ to have vanishing off diagonal elements. Therefore the covariance has to be diagonalized. This can be done with by a rotation matrix $\Phi$ so that
+	$$ 
+	\begin{pmatrix}
+	Z_1\\
+	Z_2\\
+	\end{pmatrix}
+	 = (X-\mu_X,Y-\mu_Y)
+	 \begin{pmatrix}
+	 \phi_{11}&\phi_{12}\\
+	 \phi_{21}&\phi_{22}\\
+	 \end{pmatrix}
+	 =
+	 \begin{pmatrix}
+	 \phi_{11}(X-\mu_X)&\phi_{12}(Y-\mu_Y)\\
+	 \phi_{21}(X-\mu_X)&\phi_{22}(Y-\mu_Y)\\
+	 \end{pmatrix}
+	 $$
+	 and
+	 $$
+	 \begin{pmatrix}
+	 Cov(Z_1,Z_1)&Cov(Z_1,Z_2)\\
+	 Cov(Z_2,Z_1)&Cov(Z_2,Z_2)\\
+	 \end{pmatrix}
+	 =
+	 \begin{pmatrix}
+	 	\sigma_{Z_1}^2&0\\
+	 	0&\sigma_{Z_2}^2\\
+	 \end{pmatrix}
+	 $$
+	 The rotation matrix $\Phi$ needs to satisfy the condition $\phi_{11}^2+ \phi_{21}^2=1$ and $\phi_{12}^2+\phi_{22}^2=1$
+	 It is straightforward to generalize the case of $p=2$ to an arbitrary $p$. 
+	}
+	\paragraph{Proportion of Variance Explained by Principal Components}
+	\RTheory
+	{
+	There is an information loss of the given data by projecting the observations onto the first few principal components. Therefore we want to know the \textit{proportion of variance explained (PVE)}. The \textit{total variance} is defined as
+	$$
+	\sum\limits_{j=1}\limits^{p} Var(X_j)=\sum\limits_{j=1}\limits^{p}\frac{1}{n}\sum\limits_{i=1}\limits^{n}x_{ij}^2
+	$$	
+	and the variance of the $m$th principal component is
+	$$
+	\frac{1}{n}\sum\limits_{i=1}\limits^{n}z_{im}^2=\frac{1}{n}\sum\limits_{i=1}\limits^{n}\bigg(\sum\limits_{j=1}\limits^{p}\phi_{jm}x_{ij}\bigg)^2
+	$$
+	Therefore the PVE by the $m$th principal component is given by
+	$$
+\frac{\sum\limits_{i=1}\limits^{n}\bigg(\sum\limits_{j=1}\limits^{p}\phi_{jm}x_{ij}\bigg)^2}{\sum\limits_{j=1}\limits^{p}\sum\limits_{i=1}\limits^{n}x_{ij}^2}
+	$$
+	}
+	{sections/ProbabilityStatistics/JointDistributions/RCode/USArrests_pve.R}
+
+	
+
 
 }
