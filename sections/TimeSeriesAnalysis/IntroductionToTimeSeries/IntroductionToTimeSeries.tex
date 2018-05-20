@@ -7,7 +7,6 @@ Models are not always \textit{independent of the order} of the training data. Ma
 	\item \textbf{Predection}
 	\item \textbf{Regression}
 \end{itemize}
-\todo{Chapter 13}
 \subsubsection{Time Series with \color{blue}R}
 {
 \RTheory
@@ -160,7 +159,7 @@ Figure \ref{Fig:tsBoxPlot} shows how data aggregation can be visualized with the
 \hfill
 \break
 A useful graphical approach for visually inspecting correlations of consecutive observations are \textit{lagged scatterplots}. They amount to produce scatterplots of the original time series values against a time-shiftet version, i.e. plotting the data pairs $(x_i, x_{i-k})$.
-This can be done in {\color{blue}R} by the {\color{blue}lag.plot} command.
+This can be done in {\color{blue}R} by the {\color{blue}lag.plot} command. Figure \ref{Fig:tsLagPlot} shows that the scatterplot with lag 1 shows a linear pattern which indicates a correlation. A lag of 10 hours results in a unspecific scatter plot.
 }
 {sections/TimeSeriesAnalysis/IntroductionToTimeSeries/RCode/tsVisualization.R}
 \begin{figure}[H]\centering
@@ -185,6 +184,68 @@ This can be done in {\color{blue}R} by the {\color{blue}lag.plot} command.
 		\label{Fig:tsLagPlot}
 	\end{minipage}
 \caption{Visualization}
+\end{figure}
+\paragraph{Decomposition of time series}
+\begin{figure}[H]\centering
+	\includegraphics[width=0.7\linewidth]{images/tsDecomposition.png}
+	\caption{Decomposition of additive time series}
+	\label{Fig:tsDecomposition}
+\end{figure}
+\RTheory
+{\textbf{Moving Average}\vfill
+A simple additive decomposition model is given by
+$$x_k = m_k + s_k + z_k $$
+where at time index $k$, $x_k$ is the observed series, $m_k$ is the trend,  $s_k$ is the seasonal effect, and $z_k$ is an error term that is, in general, a sequence of \textit{correlated} random variables with mean zero.
+\vfill
+\hfill
+\break
+In the AirPassenger data the seasonal effects may increase as the trend increase. Thus a multiplicative model is more convenient
+$$ x_k = m_k \cdot s_k + y_k $$
+If the noise is multiplicative as well, the logarithm of $x_k$ is a linear model again
+$$log(x_k) = log(m_k) + log(s_k) + log(y_k) $$
+A simple method for estimating $m_k$ and $s_k$ is by means of the moving average filter. Assume that $\{x_1,x_2,...,x_k \}$ is a time series and that $p \in \mathbf{N}$. The \textit{moving averaage filter} of length $p$ is defined as follows
+\begin{itemize}
+	\item  If $p$ is odd, then $p=2l + 1$ and the filtered sequence is defined by
+	$$ g(x_i)= \frac{1}{p}(x_{i-l}+...+x_i+...+x_{i+l})$$ 
+	\item  If $p$ is even, then $p=2l$ and the filtered sequence is defined by
+	$$ g(x_i)= \frac{1}{p}(\frac{1}{2}x_{i-l}+x_{i-l+1}+...+x_i+...+{i+l-1}+\frac{1}{2}x_{i+l})$$ 
+\end{itemize}
+The value $p$ is referred to as \textit{window width}. 
+\vfill
+\hfill
+\break
+Estimate seasonal additive effect: $\hat{s_k}={x_k}-\hat{m_k}$
+\vfill
+\hfill
+\break
+Remainder: $\hat{r_i}=x_i-\hat{m_i}-\hat{s_i}$
+\vfill
+\hfill
+\break
+To diminsh the non-random parts the steps are repeated with the logarithm model. AirPassenger amounts to a multiplicative model.
+}
+{sections/TimeSeriesAnalysis/IntroductionToTimeSeries/RCode/tsDecomposition.R}
+\RTheory
+{
+\textbf{Seasonal Decomposition of Time Series by Loss (STL)}\vfill
+The decomposition method above is seldomly used because of several reasons. Hence the {\color{blue}stl()} function is used. Two mandatory parameters have to be passed to it:
+\begin{enumerate}
+	\item {\color{blue}x} he time series to be decomposed
+	\item {\color{blue}s.window} he loess window size for the seasonality component. The larger the value the slower the change of seasonality in the data set over time.
+\end{enumerate}
+}
+{sections/TimeSeriesAnalysis/IntroductionToTimeSeries/RCode/tsSTL.R}
+\begin{figure}[H]\centering
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=1\linewidth]{images/tsSTL.png}
+	\subcaption{STL decomposition of the log of AirPassengers data}
+	\label{Fig:tsSTL}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=1\linewidth]{images/tsMonthplot.png}
+	\subcaption{Cycle-subseries of the STL decomposition}
+	\label{Fig:tsMonthplot}
+\end{minipage}
 \end{figure}
 
 }
