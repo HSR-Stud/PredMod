@@ -71,14 +71,61 @@
 				\end{twoColTable}
 			}
 			
-			 \RCode%
-			 {%
-			 	Cross Entropy and Gini measures in R%
-			 }%
-			 {%
-			 	sections/Classification/DecisionTrees/NodePurity/CrossEntropyGiniExample.R%
-			 }
+			\RCode%
+			{%
+				Cross Entropy and Gini measures in R%
+			}%
+			{%
+				sections/Classification/DecisionTrees/NodePurity/CrossEntropyGiniExample.R%
+			}
 			
+		\paragraph{Making Predictions}
+			\RExample
+				{
+					sections/Classification/DecisionTrees/MakingPredictions/sourceCode.R
+				}
+				{
+					sections/Classification/DecisionTrees/MakingPredictions/output.R
+				}
+				{
+					\todo{Interpretation here}
+				}
+				
+		\paragraph{Tree Pruning}
+		    Tree Pruning is the process of reducing the number of tree nodes based on various techniques.
+			This is done in order to reduce the size of the mode, because, for example, smaller models usually generalize better and may take less computing time.
+			
+			\subparagraph{Cost Complexity Pruning}
+				\begin{twoColTable}
+					\hline
+					\twoColHdrRow{General Definitons}\\
+					\endhead
+					\hline
+					Number of terminal nodes
+						& $|T|$\\
+					\hline
+					Number of elements in the node
+						& $N_m$\\
+					\hline
+					Arbitrary node purity measure (e.g. Gini Index)
+						& $Q_m(T)$\\
+					\hline
+					Cost-Complexity Function of subtree $T$
+						& $R_\alpha(T) = \sum\limits_{m=1}^{|T|} N_m Q_m(T) + \alpha|T|, \qquad \alpha \geq 0$\\
+					\hline
+				\end{twoColTable}
+				
+				\RTheory
+				{
+					\begin{enumerate}
+					    \item Use recursive binary splitting to grow a very large tree $T_0$ and set $\alpha = 0$
+					    \item Increase $\alpha$ and for each value compute the subtree $T_\alpha$ that minimizes the cost-complexity function $R_\alpha(T)$
+					    \item Stop if $T_\alpha$ is the root node
+					\end{enumerate}
+				}
+				{
+					sections/Classification/DecisionTrees/TreePruning/CostComplexityExample.R
+				}
 			
 			
 			
