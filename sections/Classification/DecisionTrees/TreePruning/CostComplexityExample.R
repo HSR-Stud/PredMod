@@ -1,4 +1,4 @@
-# The following code computes a large tree and performs cost-complexity pruning where the parameter α is chosen by 10-fold cross-validation.
+# The following code computes a large tree and performs cost-complexity pruning where the parameter alpha is chosen by 10-fold cross-validation.
 
 
 require(tree)
