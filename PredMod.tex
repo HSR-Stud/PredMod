@@ -2,7 +2,7 @@
 % Dokumentinformationen % 
 %%%%%%%%%%%%%%%%%%%%%%%%% 
 \title{TSM\_PredMod}
-\author{R. Ammann, D. Wright} % Do not remove any names!
+\author{D. Wright, R. Ammann} % Do not remove any names!
 % Initial authors stay first.
 %\newcommand{\versioninfo}{FS2018}
 
@@ -29,7 +29,7 @@
 % creates a pre-formatted two column table for arbitrary inputs 
 \newenvironment{twoColTable}
 {
-	\begin{longtable}{|p{0.475\linewidth}|p{0.475\linewidth}|}%
+	\begin{longtable}[t]{|p{0.475\linewidth}|p{0.475\linewidth}|}%
 	}%
 	{%
 	\end{longtable}%
@@ -108,6 +108,10 @@
 \begin{document} 
 
 \selectlanguage{english}
+
+\tableofcontents
+
+\clearpage
 
 \input{sections/RTutorial/RTutorial.tex}
 

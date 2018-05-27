@@ -113,14 +113,27 @@
 					Cost-Complexity Function of subtree $T$
 						& $R_\alpha(T) = \sum\limits_{m=1}^{|T|} N_m Q_m(T) + \alpha|T|, \qquad \alpha \geq 0$\\
 					\hline
+					Algorithm
+						&
+							\begin{enumerate}
+							    \item Use recursive binary splitting to grow a very large tree $T_0$ and set $\alpha = 0$
+							    \item Increase $\alpha$ and for each value compute the subtree $T_\alpha$ that minimizes the cost-complexity function $R_\alpha(T)$
+							    \item Stop if $T_\alpha$ is the root node
+							\end{enumerate}\\
+					\hline
 				\end{twoColTable}
 				
+
+			\subparagraph{Optimal Pruning by Cross-Validation}
 				\RTheory
 				{
+					\textbf{Algorithm:}
+					
 					\begin{enumerate}
-					    \item Use recursive binary splitting to grow a very large tree $T_0$ and set $\alpha = 0$
-					    \item Increase $\alpha$ and for each value compute the subtree $T_\alpha$ that minimizes the cost-complexity function $R_\alpha(T)$
-					    \item Stop if $T_\alpha$ is the root node
+					    \item Divide the data set into $K$ folds. For $k = 1, \dots, K$
+					    \item Grow a large tree $T_0$ based on all but the $k$-th fold of the data set.
+					    \item Perform cost-complexity pruning and obtain a sequence of optimal subtrees $T_\alpha$ as a function of $\alpha$. Compute the classification error rate on the $k$-th fold as a function of $\alpha$
+					    \item For each value of $\alpha$ average the classification error rate over the $K$ folds. Choose $\alpha$ such that the error rate is minimal
 					\end{enumerate}
 				}
 				{
