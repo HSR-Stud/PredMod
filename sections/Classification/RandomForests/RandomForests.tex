@@ -1,67 +1,91 @@
-\subsection{Random Forests}
-	\subsubsection{Bootstrapping}
-	 	\RTheory
-	 	{
-	 		Bootstrapping is used to estimate some arbitrary quantity $\gamma$
-	 		
-	 	    \textbf{Algorithm:}
+\subsection{Bootstrapping}
+ 	\RTheory
+ 	{
+ 		Bootstrapping is used to estimate some arbitrary quantity $\gamma$
+ 		
+ 	    \textbf{Algorithm:}
 
-			\begin{enumerate}
-    	    	\item Choose a (large) number $B \in N$
-    	    	\item For $b = 1,\dots,B$
-    	    		\begin{enumerate}
-    	    		    \item Draw $n$ samples $\left\{x_1^*,\dots,x_n^*\right\}$ from $\left\{x_1,\dots,x_n\right\}$ with replacement.
-    	    		    \item Compute the estimator $\hat{\gamma} = \hat{\gamma}(x_1^*,\dots,x_n^*)$
-    	    		\end{enumerate}
-    	    	\item The empirical distribution $\hat{F}^*(\hat{\gamma}_1^*,\dots,\hat{\gamma}_n^*)$ approximates the distribution of $\hat{\gamma}$.
-    		\end{enumerate}
-    		
-    		\textbf{Estimators:}
-    		
-    		$$\begin{aligned}
-    			\bar{\gamma}^* &= \frac{1}{B} \sum\limits_{b=1}^B \hat{\gamma}_b^*\\
-    			se_B(\hat{\gamma}) &= \sqrt{\frac{1}{B-1} \sum\limits_{b=1}^B (\hat{\gamma}_b^* - \bar{\gamma}^*)}
-    		\end{aligned}$$
-    	}
-    	{
-    		sections/Classification/RandomForests/Bootstrap/example.R
-    	}	
+		\begin{enumerate}
+	    	\item Choose a (large) number $B \in N$
+	    	\item For $b = 1,\dots,B$
+	    		\begin{enumerate}
+	    		    \item Draw $n$ samples $\left\{x_1^*,\dots,x_n^*\right\}$ from $\left\{x_1,\dots,x_n\right\}$ with replacement.
+	    		    \item Compute the estimator $\hat{\gamma} = \hat{\gamma}(x_1^*,\dots,x_n^*)$
+	    		\end{enumerate}
+	    	\item The empirical distribution $\hat{F}^*(\hat{\gamma}_1^*,\dots,\hat{\gamma}_n^*)$ approximates the distribution of $\hat{\gamma}$.
+		\end{enumerate}
+		
+		\textbf{Estimators:}
+		
+		$$\begin{aligned}
+			\bar{\gamma}^* &= \frac{1}{B} \sum\limits_{b=1}^B \hat{\gamma}_b^*\\
+			se_B(\hat{\gamma}) &= \sqrt{\frac{1}{B-1} \sum\limits_{b=1}^B (\hat{\gamma}_b^* - \bar{\gamma}^*)}
+		\end{aligned}$$
+	}
+	{
+		sections/Classification/RandomForests/Bootstrap/example.R
+	}	
+	
+\subsection{Bagging}
+ 	\RTheory
+ 	{
+ 		The use of bootstrapping to generate $B$ models using bootstrapped training sets. The resulting bagged model is:
+ 		
+ 		\begin{itemize}
+ 		    \item \textbf{For regression:}
+ 		    
+ 		    	$$ \hat{f}_{bag}(x) = \frac{1}{B} \sum\limits_{b=1}^B f_b^*(x)$$
+ 		    	
+ 		  	\item \textbf{For classification:}
+ 		  	
+				Typically the most commonly resulting class is used (\emph{majority vote}).
+ 		  	
+ 		  	\item \textbf{For decision trees:}
+ 		  	
+ 	    		Models are grown deep and left unpruned, then majority vote is applied. (See example \textrightarrow)
+ 	    		
+ 	    	\item \textbf{Out of bag error estimate:}
+ 	    	
+		 	    \begin{enumerate}
+		 	        \item For $i = 1,\dots, n$ find all bootstrapped models $\hat{f}_b^*$ that do not use the $i$-th observation for training
+		 	        \item The out-of-bag (OOB) error estimate is the classification error
+		 	        	$$Err^* = \frac{1}{n} \sum\limits_{i=1}^nI(y_i \neq \hat{y}_i^*)$$ 
+		 	    \end{enumerate}
+ 		\end{itemize}
+ 		
+ 		Bagged trees lose their favourable asset of interpretability.
+	}
+	{
+		sections/Classification/RandomForests/Bagging/example.R
+	}		
     	
-    \subsubsection{Bagging}
-	 	\RTheory
-	 	{
-	 		The use of bootstrapping to generate $B$ models using bootstrapped training sets. The resulting bagged model is:
-	 		
-	 		\begin{itemize}
-	 		    \item \textbf{For regression:}
-	 		    
-	 		    	$$ \hat{f}_{bag}(x) = \frac{1}{B} \sum\limits_{b=1}^B f_b^*(x)$$
-	 		    	
-	 		  	\item \textbf{For classification:}
-	 		  	
-					Typically the most commonly resulting class is used (\emph{majority vote}).
-	 		  	
-	 		  	\item \textbf{For decision trees:}
-	 		  	
-	 	    		Models are grown deep and left unpruned, then majority vote is applied. (See example \textrightarrow)
-	 	    		
-	 	    	\item \textbf{Out of bag error estimate:}
-	 	    	
-			 	    \begin{enumerate}
-			 	        \item For $i = 1,\dots, n$ find all bootstrapped models $\hat{f}_b^*$ that do not use the $i$-th observation for training
-			 	        \item The out-of-bag (OOB) error estimate is the classification error
-			 	        	$$Err^* = \frac{1}{n} \sum\limits_{i=1}^nI(y_i \neq \hat{y}_i^*)$$ 
-			 	    \end{enumerate}
-	 		\end{itemize}
-	 		
-	 		
-	 	    
-	 	    
-	 	    
-	 	    
-	 	    
-	 	    
-    	}
-    	{
-    		sections/Classification/RandomForests/Bagging/example.R
-    	}		
+\subsection{Random Forests}
+	\RTheory
+	{
+		\begin{itemize}
+	    	\item Bagged trees are built from bootstrapped training samples
+	    	\item From each tree, $m$ predictors are chosen as split candidates from the full set of $p$ predictors. Typically $m \simeq \sqrt{p}$
+	    	\item The split is allowed to use only one of the $m$ predictors
+		\end{itemize}
+		
+		\textbf{Rationale:}
+		
+		Choosing only a small subset of the available predictor variables is done because there are very strong and very weak predictors. Most or all of the trees will choose the strong predictors, and therefore the trees will look very similar, hence the predictions will be highly correlated.
+	}
+	{
+		sections/Classification/RandomForests/RandomForests/example.R
+	}
+	
+	\subsubsection{Variable Importance}
+		\RTheory
+		{
+			\begin{itemize}
+			    \item Random Forests are not as easily interpretable as Decision Trees.
+			    \item There are measures that indicate the significance of certain predictor variables, such as the Variable Importance.
+			    \item The variable importance averages the number of times the Gini Index is decreased by splits over a given predictor.
+			\end{itemize}
+		}
+		{
+			sections/Classification/RandomForests/RandomForests/variableImportance.R
+		}
+		
