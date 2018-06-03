@@ -93,8 +93,7 @@
 					& $P[X_i=x_i]$\\
 				\hline
 				Probability that the observations actually occurred
-					& 	\vspace{0pt}
-					
+					& 
 						{$\begin{aligned}
 							&P[(X_1=x_1)\cap (X_2=x_2)\cap ... \cap (X_n=x_n)]\\
 							&= P[X_1=x_1]\cdot P[X_2=x_2]\cdot ... \cdot P[X_n=x_n]\\
@@ -105,8 +104,7 @@
 					& $\theta$\\
 				\hline
 				Likelihood function:\newline Probability that the $n$ measurements of independent random variables are observed.
-					& \vspace{0pt}
-					
+					& 
 						{$\begin{aligned}
 							&L(\theta) = P[X_1=x_1|\theta]\cdot P[X_2=x_2|\theta]\cdot ... \cdot P[X_n=x_n|\theta]\\
 							&= \prod\limits_{i=1}\limits^n P[X_i = x_i|\theta]
@@ -193,135 +191,186 @@
 	
 	\begin{twoColTable}
 			\hline
-			\twoColHdrRow{$z$-Test ($\sigma_x$ known): Example}\\
+			\twoColHdrRow{$z$-Test ($\sigma_x$ known): Standardized example}\\
 			\hline
-					Measurement of fusion heat:
-					& The empirical mean value of $n=13$ measurements is $80.02$. From previous measurements the standard deviation is $\sigma_X = 0.01$. Is a fusion heat of exactly $80.00\frac{g}{cal}$ plausible?\\
+			Measurement of fusion heat:
+				& The empirical mean value of $n=13$ measurements is $80.02$. From previous measurements the standard deviation is $\sigma_X = 0.01$. Is a fusion heat of exactly $80.00\frac{g}{cal}$ plausible?\\
 			\hline
-					1. Model:
-					& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X=0.01$ known, $n=13$\\
+			Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X=0.01$ known, $n=13$\\
 			\hline	
-					2. Null hypothesis:
-					& $H_0$:	$\mu=\mu_0=80.00$\\
-					Alternative:
-					& $H_A$:	$\mu \neq \mu_0$\\
+			Null hypothesis:
+				& $H_0$:	$\mu=\mu_0=80.00$\\
+			Alternative:
+				& $H_A$:	$\mu \neq \mu_0$\\
 			\hline	
-					3. Test statistic:
-					& $Z=\frac{\sqrt{n}\bar{X}_n - \mu_0)}{\sigma_{X_n}}$\\
-					Null distribution (assuming $H_0$ is true):
-					&$Z \sim N(0,1)$\\
+			Test statistic:
+				& $Z=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\sigma_{X_n}}$\\
 			\hline
-					4. Significance level:
-					& $\alpha = 0.05$ (commonly used $\alpha$-level)\\
+			Null distribution (assuming $H_0$ is true):
+				&$Z \sim N(0,1)$\\
 			\hline
-					5. Rejection region for the test statistic:
-					& $K=(-\infty,z_{\frac{\alpha}{2}}] \cup [z_{1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$\\
-					Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
-					&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest.R}}\\
-					The following rejection region for the test statistic results
-					& $z_{\frac{\alpha}{2}} = \Phi^{-1}(\alpha/2) = \Phi^{-1}(0.025)=-1.96$ \vfill
-					$K=(-\infty,-1.96] \cup [1.96, \infty)$ \\
+			Significance level:
+				& $\alpha = 0.05$ (commonly used $\alpha$-level)\\
 			\hline
-					6. Test decision:
-					&Hence the value for the statistics is\\
-					&$z=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\sigma_{X_n}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.01}=7.211$\\
-					\textbf{Remarks:} Standardizing is in principle unnecessary because of technical aid of computer software.
-					&Therefore the observed value falls into the rejection region.\\
-			\hline	
-					3. Test statistic: (not standardized) 
-					& The mean value of the measurements\\
-					&$T$: $\bar{X}_n$\\
-					Null distribution (assuming $H_0$ is true):
-					&$T\sim N(\mu_0,\frac{\sigma_{X}^{2}}{n}) = N(80,\frac{0.01^2}{13})$\\	
+			Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
+				& {\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest.R}}\\
+			Rejection region for the test statistic (with the quantile returned from {\color{blue}R}):
+				& 
+					 {$\begin{aligned}
+						z_{\frac{\alpha}{2}} &= \Phi^{-1}(\alpha/2) = \Phi^{-1}(0.025)=-1.96\\
+						K &= (-\infty,z_{\frac{\alpha}{2}}] \cup [z_{1-\frac{\alpha}{2}}, \infty) \quad \mathrm{with} \quad H_A: \mu \neq \mu_0\\
+						K &= (-\infty,-1.96] \cup [1.96, \infty)
+					 \end{aligned}$}\\
 			\hline
-					5. Rejection region for the test statistic: (not standardized) 
-					& $K=(-\infty,c_u] \cup [c_o, \infty)$ with $H_A: \mu \neq \mu_0$\\
-					Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
-					&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest2.R}}\\
-					In this way, we obtain the rejection region tor the test statistic:
-					&$K=(-\infty,79.99] \cup [80.01, \infty)$ \\	
+			Test decision:
+				& $z=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\sigma_{X_n}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.01}=7.211$\\
+				& Therefore the observed value falls into the rejection region.\\
 			\hline
+		\end{twoColTable}
 			
+		\begin{twoColTable}
+			\hline
+			\twoColHdrRow{$z$-Test ($\sigma_x$ known): Not standardized example}\\
+			\hline
+			Measurement of fusion heat:
+				& The empirical mean value of $n=13$ measurements is $80.02$. From previous measurements the standard deviation is $\sigma_X = 0.01$. Is a fusion heat of exactly $80.00\frac{g}{cal}$ plausible?\\
+			\hline
+			Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X=0.01$ known, $n=13$\\
+			\hline	
+			Null hypothesis:
+				& $H_0$:	$\mu=\mu_0=80.00$\\
+			Alternative:
+				& $H_A$:	$\mu \neq \mu_0$\\
+			\hline
+			Test statistic: (not standardized) 
+				&$T$: $\bar{X}_n$\\
+			\hline
+			Null distribution (assuming $H_0$ is true):
+				&$T\sim N(\mu_0,\frac{\sigma_{X}^{2}}{n}) = N(80,\frac{0.01^2}{13})$\\
+			\hline
+			Significance level:
+				& $\alpha = 0.05$ (commonly used $\alpha$-level)\\
+			\hline
+			Given $\alpha = 0.05$, {\color{blue}R} yields the following 2.5$\%$ quantile of the standard normal distribution.
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/zTest2.R}}\\
+			\hline
+			Rejection region for the test statistic (with the quantile returned from {\color{blue}R}):
+				& 
+					{$\begin{aligned}
+						K &= (-\infty,c_u] \cup [c_o, \infty) \quad \mathrm{with} \quad H_A: \mu \neq \mu_0\\
+						K &= (-\infty,79.99] \cup [80.01, \infty)
+					\end{aligned}$}\\
+			\hline
 	\end{twoColTable}
 	
 	\begin{twoColTable}
 			\hline
 			\twoColHdrRow{$t$-Test ($\sigma_x$ unknown)}\\
 			\hline
-					1. Model:
-					& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated by $						\hat{\sigma}_X$\\
+			Model:
+				& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated by $						\hat{\sigma}_X$\\
 			\hline	
-					2. Null hypothesis:
-					& $H_0$:	$\mu=\mu_0$\\
-					Alternative:
-					& $H_A$:	$\mu \neq \mu_0$	(or $<$ or $>$)\\
+			Null hypothesis:
+				& $H_0$:	$\mu=\mu_0$\\
+			Alternative:
+				& $H_A$:	$\mu \neq \mu_0$	(or $<$ or $>$)\\
 			\hline	
-					3. Test statistic:
-					& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{observed-expected}						{estimated\,\,standard\,\,error}$\\
-					Null distribution (assuming $H_0$ is true):
-					&$T \sim t_{n-1}$\\
+			Test statistic:
+				& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{observed-expected}						{estimated\,\,standard\,\,error}$\\
 			\hline
-					4. Significance level:
-					& $\alpha$\\
+			Null distribution (assuming $H_0$ is true):
+				&$T \sim t_{n-1}$\\
 			\hline
-					5. Rejection region for the test statistic:
-					& $K=(-\infty,t_{n-1;\frac{\alpha}{2}}] \cup [t_{n-1;1-\frac{\alpha}{2}}, \infty)$ 						with $H_A: \mu \neq \mu_0$, \vfill 
-					$K=(-\infty,t_{n-1;\alpha]}$ with $H_A: \mu < \mu_0$, \vfill
-					$K=[t_{n-1;1-\alpha}, \infty)$ with $H_A: \mu > \mu_0$\\
-		\hline
-					6. Test decision:
-					& Check whether the observed value of the test statistic falls into the rejection region.\\
+			Significance level:
+				& $\alpha$\\
+			\hline
+			Rejection region for the test statistic:
+				&  
+					{$\begin{aligned}
+						K &= (-\infty,t_{n-1;\frac{\alpha}{2}}] \cup [t_{n-1;1-\frac{\alpha}{2}}, \infty) \quad \mathrm{with} \quad H_A: \mu \neq \mu_0\\
+						K &= (-\infty,t_{n-1;\alpha]} \quad \mathrm{with} \quad H_A: \mu < \mu_0\\
+						K &= [t_{n-1;1-\alpha}, \infty) \quad \mathrm{with} \quad H_A: \mu > \mu_0
+					\end{aligned}$}\\
+			\hline
+			Test decision:
+				& Check whether the observed value of the test statistic falls into the rejection region.\\
 		\hline
 		\twoColHdrRow{Example}\\
 			\hline
-					1. Model:
-					& $X_1,...,X_n$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated, $\hat{\sigma}_X=0.024$\\
+			Model:
+				& $X_1,...,X_13$ i.i.d. $\sim N(\mu, \sigma_{X}^2)$, $\sigma_X$ is estimated, $\hat{\sigma}_X=0.024$\\
 			\hline	
-					2. Null hypothesis:
-					& $H_0$:	$\mu=\mu_0=80.00$\\
-					Alternative:
-					& $H_A$:	$\mu \neq \mu_0$\\
+			Null hypothesis:
+				& $H_0$:	$\mu=\mu_0=80.00$\\
+			Alternative:
+				& $H_A$:	$\mu \neq \mu_0$\\
 			\hline	
-					3. Test statistic:
-					& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}$\\
-					Null distribution (assuming $H_0$ is true):
-					&$T \sim t_{n-1}$\\
+			Test statistic:
+				& $T=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}$\\
 			\hline
-					4. Significance level:
-					& $\alpha = 0.05$\\
+			Null distribution (assuming $H_0$ is true):
+				&$T \sim t_{n-1}$\\
 			\hline
-					5. Rejection region for the test statistic:
-					& $K=(-\infty,t_{n-1;\frac{\alpha}{2}}] \cup [t_{n-1;1-\frac{\alpha}{2}}, \infty)$ with $H_A: \mu \neq \mu_0$,\\
-					We determine the value
-					& $t_{n-1;1-\frac{\alpha}{2}}=t_{12;0.975}=2.179$\\
-					by means of {\color{blue}R}, where $\alpha =0.05$ and $n=13$.
-					&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest.R}}\\
-					The rejection region of the test statistic thus is given by
-					& $K=(-\infty,-2.179] \cup [2.179, \infty)$\\
+			Significance level:
+				& $\alpha = 0.05$\\
+			
+			\hline
+			$t$-value
+				& $t_{12;1-\frac{\alpha}{2}}=t_{12;0.975}=2.179$\\
+				&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest.R}}\\
+			\hline
+			Rejection region for the test statistic:
+				& 
+					{$\begin{aligned}
+						K &= (-\infty,t_{12;\frac{\alpha}{2}}] \cup [t_{12;1-\frac{\alpha}{2}}, \infty) \quad \mathrm{with} \quad H_A: \mu \neq \mu_0\\
+						K &= (-\infty,-2.179] \cup [2.179, \infty)\\
+					\end{aligned}$}\\
+			\hline
+			Test decision:
+				&$\bar{x}=80.02$ and $\hat{\sigma}_X=0.024$\\
+			Realized value of the test statistic
+				&$t=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.024}=3.00$\\
+				&The realized value falls into the rejection region. Therefore, the null hypothesis is rejected at 5$\%$ level.\\
 		\hline
-					6. Test decision:
-					& On the basis of $n=13$ measurements, we find\\
-					&$\bar{x}=80.02$ and $\hat{\sigma}_X=0.024$\\
-					&Hence, the realized value of the test statistic is\\
-					&$t=\frac{\sqrt{n}(\bar{X}_n - \mu_0)}{\hat{\sigma}_{X}}=\frac{\sqrt{13}(80.02 - 80.00)}{0.024}=3.00$\\
-					&The observed value falls into the rejection region. Therefore, the null hypothesis is rejected at 5$\%$ level.\\
-		\hline
-		The $t$-test directly performed in {\color{blue}R} using the function {\color{blue}t.test()}
-		\vfill
-		\vspace*{0.5cm}
-		\textbf{Remarks:}\vfill
-		(i) The observed value of the test statistic is $3.12$. Assuming the null hypothesis is true, then the test statistic follows a $t$-distribution with $df = 12$ degrees of
-		freedom. \vfill
-		\vspace*{0.5cm}
-		(ii) The observed mean value of the data is $80.02$. A $95\%$ confidence interval for the true mean is $[80.006, 80.035]$.\vfill
-		\vspace*{0.5cm}
-		(iii) The {\color{blue}R} functions {\color{blue}qt(p,df)} calculates the quantile from the probability density and the degrees of freedom and {\color{blue}pt(q,df)} calculates the probabilty density from the quantile and the degrees of freedom.\vfill
-		\vspace*{0.5cm}
-		(iv) The \textbf{confidence interval} for measurement data consists of the values µ, for which the
-		corresponding statistical test does not reject the null hypothesis. 
+	\end{twoColTable}
 	
-		&{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest2.R}}\vspace*{0.1cm}{\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTest3.R}}\\ 
-					\hline
+	\RExample
+	{
+		sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTestRExample.R
+	}
+	{
+		sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/tTestRExampleOutput.R
+	}
+	{
+		The $t$-test directly performed in {\color{blue}R} using the function {\color{blue}t.test()}
+		
+		\vspace{5mm}
+		
+		\textbf{Remarks:}
+		
+		\begin{tabular}[b]{p{0.3\linewidth}p{0.65\linewidth}}
+			Observed value of the test statistic:
+				& $3.12$. \\
+			Test statistic, \newline assuming null hypothesis is true:
+				& $t$-distribution with $df = 12$ degrees of freedom.\\
+			Observed mean value of the data:
+				& $80.02$. \\
+			\textbf{Confidence interval:}
+				& Is the region of values for $\mu$, for which the corresponding statistical test does not reject the null hypothesis\\
+			$95\%$ confidence interval \newline for the true mean
+				& $[80.006, 80.035]$.\\
+			{\color{blue}qt(p,df)}:
+				& Calculates the quantile of the $t$-distribution based on the probability and the degrees of freedom\\
+			{\color{blue}pt(q,df)}:
+				& calculates the probabilty density based on the quantile and the degrees of freedom.\\
+		\end{tabular}
+	}
+		
+		
+	\begin{twoColTable} 
+		\hline
 		\twoColHdrRow{$P$-Value}\\
 		\hline
 		The $p$-value is the probability that the test statistic will take on a value that is at least as extreme (with respect to the alternative hypothesis) as the observed value of the statistic when the null hypothesis $H_0$ is true.

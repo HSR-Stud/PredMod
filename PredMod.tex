@@ -29,7 +29,7 @@
 % creates a pre-formatted two column table for arbitrary inputs 
 \newenvironment{twoColTable}
 {
-	\begin{longtable}[t]{|p{0.475\linewidth}|p{0.475\linewidth}|}%
+	\begin{longtable}[t]{|p{0.475\textwidth}|p{0.475\textwidth}|}%
 	}%
 	{%
 	\end{longtable}%
@@ -78,7 +78,7 @@
 		\hline
 		\twoColHdrRow{\textbf{Interpretation of output:}}\\*
 		\hline
-		\multicolumn{2}{|l|}{#3}\\
+		\multicolumn{2}{|l|}{\begin{minipage}{0.95\textwidth}#3\end{minipage}}\\
 		\hline
 	\end{twoColTable}%
 }
