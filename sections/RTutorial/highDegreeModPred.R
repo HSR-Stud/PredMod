@@ -5,7 +5,7 @@ a <- read.table("Anscombe.dat", sep="", header=T)
 reg <- lm(Y2 ~ X2 + I(X2^2), data = a)
 
 # printing information of the model (use [[ ]] to access only the numeric value, without the name)
-print(cat("Intercept: ", coefficients(reg)[["(Intercept)"]]))
+print(paste("Intercept: ", coefficients(reg)[["(Intercept)"]]))
 
 # plotting input vs output data
 plot(a$X2, a$Y2, xlab="X2", ylab="Y2")

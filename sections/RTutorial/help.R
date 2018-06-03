@@ -1,5 +1,7 @@
 # help me!!
 
+?qnorm
+
 help(qnorm)
 
 ## The Normal Distribution

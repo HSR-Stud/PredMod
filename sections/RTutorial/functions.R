@@ -1,6 +1,6 @@
 heapsFun <- function (a)
 {
-	print(cat("Argument a is: ", toString(a)))
+	print(paste("Argument a is: ", toString(a)))
 }
 
 heapsFun(3)
