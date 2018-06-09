@@ -389,7 +389,7 @@
 			\hline
 		\end{twoColTable}
 		
-		\paragraph{$p$- and $t$-Test on a Linear Model in R}
+		\paragraph{Interpreting statistical test results of a Linear Model in R}
 			\RExample
 			{
 				sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/ptTestsLMCode.R
@@ -398,8 +398,17 @@
 				sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/ptTestsLMOutput.R
 			}
 			{
-				Since the t value is large for both, the intercept($\beta_0$) and $\beta_1$, and the p-value is small for both, the null hypothesis can be rejected.
-				
-				\todo{What about the significance levels?}
+				\begin{tabular}{>{\bfseries}p{0.15\textwidth}p{0.75\textwidth}}
+					t-value
+						& Value of the test statistic, assuming null hypothesis is true: $t = \frac{\beta_i - \mu}{se(\beta_i)}= \frac{\beta_i - 0}{se(\beta_i)} = \frac{\mathrm{Estimate}}{\mathrm{Std. Error}}$\\
+					Pr($>|t|$)
+						& $p$-value. Probability of observing a value of the test statistic at least as large as the returned $t$-value. Reject the null hypothesis if this value is $<\alpha$\\
+					R-squared\newline values
+						& Values close to $1$: A large part of the variance of the data is explained by the model.\\
+						& Values close to $0$: Little of the variance of the data is explained by the model.\\
+					F-Statistic
+						& Values close to $1$: There is no relationship between response and predictors.\\
+						& Values greater than $1$: There is a relationship between response and predictors.\\
+				\end{tabular}
 			}
 	}

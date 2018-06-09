@@ -36,6 +36,7 @@
 *.synctex(busy)
 *.synctex.gz
 *.synctex.gz(busy)
+*.synctex.gz.part
 *.pdfsync
 
 ## Auxiliary and intermediate files from other packages:
