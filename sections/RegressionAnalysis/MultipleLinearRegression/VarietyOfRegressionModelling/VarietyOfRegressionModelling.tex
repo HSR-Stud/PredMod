@@ -1,0 +1,55 @@
+\subsubsection{Variety of Regression Modelling}
+	\paragraph{Omitting Predictor Variables}
+		\begin{twoColTable}
+			\hline
+			\twoColHdrRow{ANOVA Test (Analysis of Variance)}\\
+			\hline
+			Working principle
+				& Based on an $F$-test which provides us with a $p$-value (probability that a value is at least as large as the test statistic)\\
+			\hline
+			Null hypothesis $H_0$
+				& Small model $\mathcal{M}_1$ is sufficient to explain the data.\\
+				& I.e. a subset of $q$ coefficients is zero\\
+				& $H_0: \quad \beta_{p-q+1} = \beta_{p-q+2} = \dots = \beta_p = 0$\\
+			\hline
+			Alternative $H_A$
+				& A more complex model $\mathcal{M}_2$ is required.\\
+			\hline
+			RSS of the full model
+				& $\mathrm{RSS}$\\
+			RSS of the small model
+				& $\mathrm{RSS}_0$\\
+			$F$-statistic
+				& $F = \frac{(\mathrm{RSS_0}-\mathrm{RSS})/q}{\mathrm{RSS}/(n-p-1)}$\\
+			\hline
+			Conclusion
+				& \textbf{Accept the null hypothesis if:}\\
+				& $F \approx 1$\\
+				& Two-sided $p$-value {\color{blue} Pr($>F$)} $> \alpha$ (significance level)\\
+				& \textbf{Reject the null hypothesis if:}\\
+				& $F >> 1$\\
+				& Two-sided $p$-value {\color{blue} Pr($>F$)} $\leq \alpha$ (significance level)\\
+			\hline
+		\end{twoColTable}
+		
+	\paragraph{Example: Omitting predictor variables using {\color{blue}anova()} and {\color{blue}drop1()}}
+		\RExample
+		{
+			sections/RegressionAnalysis/MultipleLinearRegression/VarietyOfRegressionModelling/AnovaDrop1/code.R
+		}
+		{
+			sections/RegressionAnalysis/MultipleLinearRegression/VarietyOfRegressionModelling/AnovaDrop1/Output.R
+		}
+		{
+			\begin{tabular}{>{\bfseries}p{0.13\linewidth}p{0.86\linewidth}}
+			First test
+				& $F = 0.0312$, $p = 0.8599 >> \alpha$ \textrightarrow\ no evidence to reject the null hypothesis.\\
+				& The probability of a measured value of the $F$-statistic to be at least as large as 0.0312, assuming the null hypothesis is true, is very large!\\
+			Second test
+				& $F = 1076.4$, $p = < 2.2e-16 << \alpha$ \textrightarrow\ reject the null hypothesis.\\
+				& The probability of a measured value of the $F$-statistic to be at least as large as 1076.4, assuming the null hypothesis is true, is very small!\\
+			Third test
+				& For each predictor variable the $F$- and $p$-values are calculated. For TV and radio, the $p$-values are very small, therefore the null hypothesis must be rejected, for newspaper sales, the $p$-value is $>\alpha=5\%$, therefore the null hypothesis must be accepted.\\
+				& \note{The {\color{blue}drop1()} function calculates how the quality of a model changes if \underline{only one} predictor is omitted.}
+			\end{tabular}
+		}
