@@ -50,7 +50,7 @@
 % change listing caption to be consistent with the tables
 \DeclareCaptionFont{black}{\color{black}}
 \DeclareCaptionFormat{listing}{\fcolorbox{black}{HSRBlue40}{\parbox{0.985\textwidth}{\bfseries Code example: #3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=black,textfont=black}
+\captionsetup[lstlisting]{aboveskip=4pt, belowskip=10pt, format=listing,labelfont=black,textfont=black}
 % Creates a pre-formatted code listing
 \newcommand{\RCode}[2]
 {%
@@ -100,10 +100,24 @@
 	\end{twoColTable}%
 }
 
+
+% Captions for figures inside longtable
+\makeatletter
+\def\longtabFigCaption{%
+    \refstepcounter{figure}%
+    \@dblarg{\@caption{figure}}}
+\makeatother
+
+\raggedbottom
+
 %%%%%%%%%%%%
 % Document % 
 %%%%%%%%%%%%
 \begin{document} 
+
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{lstlisting}{section}
 
 \selectlanguage{english}
 
