@@ -1,0 +1,24 @@
+\subsubsection{Collinearity}
+	\begin{itemize}
+	    \item Collinearity refers to the situation in which two or more predictor variables are closely related to one another. 
+	    \item Collinearity causes the standard error of the fitted coefficients to grow.
+	    \item Since for the t-statistic, the coefficients are divided by their standard errors, we may fail to reject the null hypothesis.
+	\end{itemize}
+	
+	\paragraph{Variance Inflation Factor (VIF)}
+		
+		\RTheory
+		{
+			The ratio of the variance of a coefficient when fitting the full model, divided by the variance of the coefficient when fitted on its own.
+			
+			$$ \mathrm{VIF}(\beta_j) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
+			
+			The minimum value of the VIF is 1, which indicates no collinearity.
+			
+			\textbf{Rule of thumb:}
+			
+			A $\mathrm{VIF}>5$ indicates a problematic amount of collinearity
+		}
+		{
+			sections/RegressionAnalysis/MultipleLinearRegression/Collinearity/VIFExample.R
+		}
