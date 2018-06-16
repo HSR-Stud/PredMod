@@ -1,0 +1,107 @@
+\subsubsection{Choosing the Optimal Model}
+	\paragraph{Adjusted $R^2$}
+		\begin{twoColTable}
+			\hline
+			\textbf{Description}
+				& A large adjusted $R^2$ value indicates that the model fits the data well.\\
+			\hline
+			\textbf{Definition}
+				& 
+					$\begin{aligned}
+						R^2 &= 1 - \frac{\mathrm{RSS}}{\mathrm{TSS}}\\
+						\mathrm{adjusted}\quad R^2 &= 1 - \frac{\mathrm{RSS} \cdot (n-1)}{\mathrm{TSS} \cdot (n-p-1)}
+					\end{aligned}$\\
+			\hline
+			Number of variables
+				& $p$\\
+			\hline
+			Number of measurements
+				& $n$\\
+			\hline
+		\end{twoColTable}
+		
+		\RCode
+		{
+			Forward Stepwise Selection with Adjusted $R^2$ Calculation
+		}
+		{
+			sections/RegressionAnalysis/LinearModelSelection/ChoosingOptimalModel/AdjR2/AdjR2.R
+		}
+	
+	\paragraph{AIC - Akaike Information Criterion}
+		\begin{twoColTable}
+			\hline
+			\textbf{Definition}
+				& $\mathrm{AIC} = -2\log(L) + 2p$\\
+			\hline
+			\textbf{Case of Gaussian errors (least squares model)}
+				& $\mathrm{AIC} = \frac{1}{n\hat{\sigma}^2}\left(\mathrm{RSS} + 2p\hat{\sigma}^2\right)$\\
+			\hline
+			Alternative statistic that is proportional to AIC and used interchangeably
+				& $C_p = \frac{1}{n}\left(\mathrm{RSS} + 2p\hat{\sigma}^2\right)$\\
+			\hline
+			Likelihood function for a model
+				& $L$\\
+			\hline
+			Estimate of the variance of the error
+				& $\hat{\sigma}^2$\\
+			\hline
+			Number of variables
+				& $p$\\
+			\hline
+			Number of measurements
+				& $n$\\
+			\hline
+			\textbf{Conclusion}
+				& The model with the smallest AIC is chosen.\\
+			\hline
+		\end{twoColTable}
+		
+		\subparagraph{The {\color{blue}step()} Function}
+			This function runs the complete forward or backward step selection and returns the best model according to the AIC criterion. set  {\color{blue}trace=0} if you don't want the full output.
+		
+			\RCode
+			{
+				Forward Stepwise Selection with AIC Calculation using the {\color{blue}step()} Function
+			}
+			{
+				sections/RegressionAnalysis/LinearModelSelection/ChoosingOptimalModel/AICCP/AICCP.R
+			}
+		
+	\paragraph{BIC - Bayesian Information Criterion}
+		\begin{twoColTable}
+			\hline
+			\textbf{Definition}
+				& $\mathrm{BIC} = -2\log(L) + 2 log(n)p$\\
+			\hline
+			\textbf{Case of Gaussian errors (least squares model)}
+				& $\mathrm{BIC} = \frac{1}{n}\left(\mathrm{RSS} + \log(n)p\hat{\sigma}^2\right)$\\
+			\hline
+			\hline
+			Likelihood function for a model
+				& $L$\\
+			\hline
+			Estimate of the variance of the error
+				& $\hat{\sigma}^2$\\
+			\hline
+			Number of variables
+				& $p$\\
+			\hline
+			Number of measurements
+				& $n$\\
+			\hline
+			\textbf{Conclusion}
+				& The model with the smallest BIC is chosen.\\
+			\textbf{Note}
+				& The BIC places higher penalties on a large number of predictor variables due to $\log(n)$ term, and thus tends to result in smaller models.\\
+			\hline
+		\end{twoColTable}
+		
+		
+		\RCode
+		{
+			Forward Stepwise Selection with BIC Calculation using the {\color{blue}step()} Function\newline (k=log(nrow(Credit)) needs to be specified)
+		}
+		{
+			sections/RegressionAnalysis/LinearModelSelection/ChoosingOptimalModel/BIC/BIC.R
+		}
