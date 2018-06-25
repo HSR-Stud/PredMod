@@ -1,17 +1,26 @@
 # The following code computes a large tree and performs cost-complexity pruning where the parameter alpha is chosen by 10-fold cross-validation.
 
-
 require(tree)
 #tree controls for large tree
 tc = tree.control(nobs = 303, mincut = 1,
 minsize = 2, mindev = 1e-10)
 
 #grow large tree
-tree.model = tree(AHD~., data = heart, control = tc)
+tree.model = tree(AHD~., data = heart, control = tc, model=T)
+
 #k-fold cross-validation (K=10)
 tree.cv = cv.tree(tree.model, FUN = prune.tree, method = "misclass", K = 10)
+
+# find alpha at optimal std dev
 opt.alpha = tree.cv$k[which.min(tree.cv$dev)]
+# find size at optimal std dev
+opt.size = tree.cv$size[which.min(tree.cv$dev)]
+
+# find best tree
 opt.tree = prune.tree(tree.model,method = "misclass", k = opt.alpha)
+# OR
+opt.tree = prune.tree(tree.model,method = "misclass", best = opt.size)
+
 summary(opt.tree)
 
 ##

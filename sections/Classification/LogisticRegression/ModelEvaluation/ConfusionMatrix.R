@@ -1,2 +1,2 @@
-cm = table(predClass, trueClass, dnn = c("predicted", "true"))
-addmargins(cm)
+cm <- table(predClass, trueClass)
+cm <- addmargins(cm) # calculates and adds sum of the rows and columns
