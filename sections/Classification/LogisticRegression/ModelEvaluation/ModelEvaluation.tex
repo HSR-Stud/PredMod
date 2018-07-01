@@ -1,22 +1,15 @@
 \subsubsection{Model Evaluation}
-	\paragraph{Classification Error}
+	\paragraph{Classification Error & Confusion Matrix}
 		\RTheory
 		{
 			$$\varepsilon = \frac{1}{N}\sum\limits_{n = 0}^N I(\hat{y}_n \neq y_n)$$
+			
+			\vspace{0pt}
+			
+			\includegraphics[scale=0.5]{images/ConfusionMatrix.png}
 		}
 		{
 			sections/Classification/LogisticRegression/ModelEvaluation/ClassificationError.R
-		}
-		
-	\paragraph{Confusion Matrix}
-		\RTheory
-		{
-			\vspace{0pt}
-			
-			\includegraphics{images/ConfusionMatrix.png}
-		}
-		{
-			sections/Classification/LogisticRegression/ModelEvaluation/ConfusionMatrix.R
 		}
 		
 	\paragraph{Cross Validation}

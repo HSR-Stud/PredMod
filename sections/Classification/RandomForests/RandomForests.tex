@@ -27,37 +27,60 @@
 	}	
 	
 \subsection{Bagging}
- 	\RTheory
- 	{
- 		The use of bootstrapping to generate $B$ models using bootstrapped training sets. The resulting bagged model is:
- 		
- 		\begin{itemize}
- 		    \item \textbf{For regression:}
- 		    
- 		    	$$ \hat{f}_{bag}(x) = \frac{1}{B} \sum\limits_{b=1}^B f_b^*(x)$$
- 		    	
- 		  	\item \textbf{For classification:}
- 		  	
-				Typically the most commonly resulting class is used (\emph{majority vote}).
- 		  	
- 		  	\item \textbf{For decision trees:}
- 		  	
- 	    		Models are grown deep and left unpruned, then majority vote is applied. (See example \textrightarrow)
- 	    		
- 	    	\item \textbf{Out of bag error estimate:}
- 	    	
-		 	    \begin{enumerate}
-		 	        \item For $i = 1,\dots, n$ find all bootstrapped models $\hat{f}_b^*$ that do not use the $i$-th observation for training
-		 	        \item The out-of-bag (OOB) error estimate is the classification error
-		 	        	$$Err^* = \frac{1}{n} \sum\limits_{i=1}^nI(y_i \neq \hat{y}_i^*)$$ 
-		 	    \end{enumerate}
- 		\end{itemize}
- 		
- 		Bagged trees lose their favourable asset of interpretability.
-	}
-	{
-		sections/Classification/RandomForests/Bagging/example.R
-	}		
+	The use of bootstrapping to generate $B$ models using bootstrapped training sets. The resulting bagged model is:
+
+	\begin{itemize}
+	    \item \textbf{For regression:}
+
+	    	$$ \hat{f}_{bag}(x) = \frac{1}{B} \sum\limits_{b=1}^B f_b^*(x)$$
+
+	  	\item \textbf{For classification:}
+
+			Typically the most commonly resulting class is used (\emph{majority vote}).
+
+	  	\item \textbf{For decision trees:}
+
+    		Models are grown deep and left unpruned, then majority vote is applied. (See example \textrightarrow)
+
+    	\item \textbf{Out of bag error estimate:}
+
+	 	    \begin{enumerate}
+	 	        \item For $i = 1,\dots, n$ find all bootstrapped models $\hat{f}_b^*$ that do not use the $i$-th observation for training
+	 	        \item The out-of-bag (OOB) error estimate is the classification error
+	 	        	$$Err^* = \frac{1}{n} \sum\limits_{i=1}^nI(y_i \neq \hat{y}_i^*)$$
+	 	    \end{enumerate}
+	\end{itemize}
+%  	\RTheory
+%  	{
+%  		The use of bootstrapping to generate $B$ models using bootstrapped training sets. The resulting bagged model is:
+%  		
+%  		\begin{itemize}
+%  		    \item \textbf{For regression:}
+%  		    
+%  		    	$$ \hat{f}_{bag}(x) = \frac{1}{B} \sum\limits_{b=1}^B f_b^*(x)$$
+%  		    	
+%  		  	\item \textbf{For classification:}
+%  		  	
+% 				Typically the most commonly resulting class is used (\emph{majority vote}).
+%  		  	
+%  		  	\item \textbf{For decision trees:}
+%  		  	
+%  	    		Models are grown deep and left unpruned, then majority vote is applied. (See example \textrightarrow)
+%  	    		
+%  	    	\item \textbf{Out of bag error estimate:}
+%  	    	
+% 		 	    \begin{enumerate}
+% 		 	        \item For $i = 1,\dots, n$ find all bootstrapped models $\hat{f}_b^*$ that do not use the $i$-th observation for training
+% 		 	        \item The out-of-bag (OOB) error estimate is the classification error
+% 		 	        	$$Err^* = \frac{1}{n} \sum\limits_{i=1}^nI(y_i \neq \hat{y}_i^*)$$ 
+% 		 	    \end{enumerate}
+%  		\end{itemize}
+%  		
+%  		Bagged trees lose their favourable asset of interpretability.
+% 	}
+% 	{
+% 		sections/Classification/RandomForests/Bagging/example.R
+% 	}		
     	
 \subsection{Random Forests}
 	\RTheory

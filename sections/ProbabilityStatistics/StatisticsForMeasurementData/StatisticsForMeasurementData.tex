@@ -25,28 +25,28 @@
 			sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/QQPlot.R
 		}
 		
-		\begin{figure}[H]
-			\begin{minipage}[c]{0.5\textwidth}
-				\includegraphics[width=1\linewidth]{images/qqPlot.png}
-			\end{minipage}\hfill
-			\begin{minipage}[c]{0.5\textwidth}
-				\includegraphics[width=1\linewidth]{images/qqNormLine.png}
-			\end{minipage}\\
-			\begin{minipage}[t]{.5\textwidth}
-				\subcaption{qqplot()}
-			\end{minipage}\hfill
-			\begin{minipage}[t]{.5\textwidth}
-				\subcaption{qqnorm();qqline()}
-			\end{minipage}
-		\end{figure}
-		\begin{figure}[H]
-			\begin{minipage}[c]{0.5\textwidth}
-				\includegraphics[width=1\linewidth]{images/qqList.png}
-			\end{minipage}
-			\begin{minipage}[c]{0.5\textwidth}
-				\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/QQList.R}
-			\end{minipage}
-		\end{figure}
+% 		\begin{figure}[H]
+% 			\begin{minipage}[c]{0.5\textwidth}
+% 				\includegraphics[width=1\linewidth]{images/qqPlot.png}
+% 			\end{minipage}\hfill
+% 			\begin{minipage}[c]{0.5\textwidth}
+% 				\includegraphics[width=1\linewidth]{images/qqNormLine.png}
+% 			\end{minipage}\\
+% 			\begin{minipage}[t]{.5\textwidth}
+% 				\subcaption{qqplot()}
+% 			\end{minipage}\hfill
+% 			\begin{minipage}[t]{.5\textwidth}
+% 				\subcaption{qqnorm();qqline()}
+% 			\end{minipage}
+% 		\end{figure}
+% 		\begin{figure}[H]
+% 			\begin{minipage}[c]{0.5\textwidth}
+% 				\includegraphics[width=1\linewidth]{images/qqList.png}
+% 			\end{minipage}
+% 			\begin{minipage}[c]{0.5\textwidth}
+% 				\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/QQList.R}
+% 			\end{minipage}
+% 		\end{figure}
 
 	\subsubsection{Parameter Esitmation for Continuous Probability Distributions}
 	{
@@ -184,7 +184,7 @@
 		\end{twoColTable}
 	
 		\begin{figure}[H]
-		    \includegraphics[width=1\linewidth]{images/zTestDecision.png}
+		    \includegraphics[width=0.5\linewidth]{images/zTestDecision.png}
 		    \caption{z-Test: Rejection Region}
 		\end{figure}
 		
@@ -388,27 +388,4 @@
 				& {\lstinputlisting[style=R]{sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/pValue.R}}\\
 			\hline
 		\end{twoColTable}
-		
-		\paragraph{Interpreting statistical test results of a Linear Model in R}
-			\RExample
-			{
-				sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/ptTestsLMCode.R
-			}
-			{
-				sections/ProbabilityStatistics/StatisticsForMeasurementData/RCode/ptTestsLMOutput.R
-			}
-			{
-				\begin{tabular}{>{\bfseries}p{0.15\textwidth}p{0.75\textwidth}}
-					t-value
-						& Value of the test statistic, assuming null hypothesis is true: $t = \frac{\beta_i - \mu}{se(\beta_i)}= \frac{\beta_i - 0}{se(\beta_i)} = \frac{\mathrm{Estimate}}{\mathrm{Std. Error}}$\\
-					Pr($>|t|$)
-						& $p$-value. Probability of observing a value of the test statistic at least as large as the returned $t$-value. Reject the null hypothesis if this value is $<\alpha$\\
-					R-squared\newline values
-						& Values close to $1$: A large part of the variance of the data is explained by the model.\\
-						& Values close to $0$: Little of the variance of the data is explained by the model.\\
-					F-Statistic
-						& Values close to $1$: There is no relationship between response and predictors.\\
-						& Values greater than $1$: There is a relationship between response and predictors.\\
-				\end{tabular}
-			}
 	}

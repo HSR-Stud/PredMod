@@ -86,40 +86,44 @@ $P(Y<X)= \int\limits_0 \limits^{\infty}  \lambda_1 e^{-\lambda_1 x} (1-e^{-\lamb
 }
 \subsubsection{Covariance and Correlation}
 {
-\setlength{\extrarowheight}{3pt}
+	\setlength{\extrarowheight}{3pt}
 		
-\begin{twoColTable}
-			\hline
-			\twoColHdrRow{Covariance and Correlation}\\
-			\hline
-			\textbf{Covariance}
-			& $Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]= E[XY]-E[X]E[Y]$\\
-			$X,Y$ independent
+	\begin{twoColTable}
+		\hline
+		\twoColHdrRow{Covariance}\\
+		\hline
+		$Cov(X,Y)$
+			& $E[(X-\mu_X)(Y-\mu_Y)] = E[XY]-E[X]E[Y]$\\
+		\hline
+		$X,Y$ independent
 			& $E[XY]=E[X]E[Y]$\\
-			& $Cov(X,X)=E[(X-\mu_X)(X-\mu_X)] =E[(X-\mu_X)^2] = Var(X) $\\
-			Sum of Variances
-			& $Var(\sum\limits_{i=1}\limits^{n} X_i)=Cov(\sum\limits_{i=1}\limits^{n} X_i,\sum\limits_{i=1}\limits^{n} X_i)= \sum\limits_{i=1}\limits^{n}Var(X_i)+2\sum\limits_{i<j}\limits^{n} Cov(X_i,X_j)$\\
-			2 Random Variables
-			& $Var(X+Y)=Cov(X+Y,X+Y)=Var(X)+Var(Y)+2Cov(X,Y)$\\
-			If all $X_i$ are independent
+			& $Cov(X,X)=E[(X-\mu_X)(X-\mu_X)] = Var(X) $\\
+		\hline
+		$Var(\sum\limits_{i=1}\limits^{n} X_i)$
+			& $=Cov(\sum\limits_{i=1}\limits^{n} X_i,\sum\limits_{i=1}\limits^{n} X_i)= \sum\limits_{i=1}\limits^{n}Var(X_i)+2\sum\limits_{i<j}\limits^{n} Cov(X_i,X_j)$\\
+		\hline
+		$Var(X+Y)$
+			& $=Cov(X+Y,X+Y)=Var(X)+Var(Y)+2Cov(X,Y)$\\
+		\hline
+		If all $X_i$ are independent
 			& $Var(X_1 +X_2 +...+X_n)=Var(X_1)+...+Var(X_n)$\\
-			\hline
-			\textbf{Correlation}
-			& $ Cor(X,Y) = \rho_{XY} = \frac{Cov(X,Y}{\rho_X \rho_Y}$ where $-1 \leq Cor(X,Y) \leq 1$\\
-			Measure for strength and direction of the \textit{linear dependency} between $X$ and $Y$.
-			& $Cor(X,Y)=+1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b>0$ \vfill
-			$Cor(X,Y)=-1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b<0$ 
-			\\
-			&$|Cor(X,Y)| = 1$ means perfect linear relationship between $X$ and $Y$.\\
-			&$Cor(X,Y) = 0$ means $X$ and $Y$ are uncorrelated.\\
-			$X$ and $Y$ \textbf{linear independent}
+		\hline
+		\twoColHdrRow{Correlation}\\
+		\hline
+		$Cor(X,Y)$ 
+			& $= \rho_{XY} = \frac{Cov(X,Y}{\rho_X \rho_Y}$ where $-1 \leq Cor(X,Y) \leq 1$\\
+		Measure for strength and direction of the \textit{linear dependency} between $X$ and $Y$.
+			& $Cor(X,Y)=+1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b>0$\\ 
+			& $Cor(X,Y)=-1$ if $Y=a+bX$ for $a \in \mathbb{R}$ and $b<0$\\ 
+			& $|Cor(X,Y)| = 1$ means perfect linear relationship between $X$ and $Y$.\\
+		$X$ and $Y$ \textbf{uncorrelated, linearly independent}
 			& $Cor(X,Y) = 0$ (and thus $Cov(X,Y)=0)$\\
-			\hline
-\end{twoColTable}
-		\begin{figure}[H]\centering
-			\includegraphics[scale=1]{images/Correlation.png}
-			\caption{Correlations}
-		\end{figure}
+		\hline
+	\end{twoColTable}
+% 		\begin{figure}[H]\centering
+% 			\includegraphics[scale=1]{images/Correlation.png}
+% 			\caption{Correlations}
+% 		\end{figure}
 }
 \subsubsection{Bivariate Normal Distribution}
 {
@@ -140,14 +144,10 @@ $P(Y<X)= \int\limits_0 \limits^{\infty}  \lambda_1 e^{-\lambda_1 x} (1-e^{-\lamb
 			\end{pmatrix}\bigg)$\\
 			\hline
 			Covariance Matrix
-			& $\sum = \begin{pmatrix}
-			Cov(X,X) & Cov(X,Y)\\
-			Cov(Y,X) & Cov(Y,Y)\\
-			\end{pmatrix}
-			= 
+			& $\sum = 
 			\begin{pmatrix}
-			\sigma_X^2 & \rho_{XY}\sigma_X\sigma_Y\\
-			\rho_{XY}\sigma_X\sigma_Y & \sigma_Y^2\\
+				\sigma_X^2 & \rho_{XY}\sigma_X\sigma_Y\\
+				\rho_{XY}\sigma_X\sigma_Y & \sigma_Y^2\\
 			\end{pmatrix}$\\
 			\hline
 \end{twoColTable}
@@ -156,77 +156,67 @@ $P(Y<X)= \int\limits_0 \limits^{\infty}  \lambda_1 e^{-\lambda_1 x} (1-e^{-\lamb
 {
 PCA is a popular approach for deriving a low-dimensional set of features from a large set of variables. PCA is a technique for reducing the dimension of a $n$ x $p$ data matrix $X$ where $n$ corresponds to the number of observations and $p$ to the number of  variables.
 \paragraph{Example: USArrests}
-\begin{figure}[H]\centering
-\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=1\linewidth]{images/USArrests_PCA.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=1\linewidth]{images/USArrests_PCA2.png}
-\end{minipage}\hfill
-\begin{minipage}[t]{.5\textwidth}
-	\subcaption{The data vary the most along the first principal component}
-\end{minipage}\hfill
-\begin{minipage}[t]{.5\textwidth}
-	\subcaption{Counter Clockwise Rotation that 1. PC coincides with x-axis}
-\end{minipage}
-\caption{1st and 2nd Principal Component}
-\end{figure}
-
-\begin{figure}[H]\centering
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/USArrests_PCA3.png}
-	\end{minipage}\hfill
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/USArrests_PCA4.png}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{.5\textwidth}
-		\subcaption{$z_{i1}$ versus Murder}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{.5\textwidth}
-		\subcaption{$z_{i1}$ versus Assault}
-	\end{minipage}
-\end{figure}
-
-\begin{figure}[H]\centering
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/USArrests_PCA5.png}
-	\end{minipage}\hfill
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/USArrests_PCA6.png}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{.5\textwidth}
-		\subcaption{$z_{i2}$ versus Murder}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{.5\textwidth}
-		\subcaption{$z_{i2}$ versus Assault}
-	\end{minipage}
-\caption{The fact that the 2nd principal component scores are much closer to zero indicates that this component captures far less information as the 1st principal component.}
-\end{figure}
-\RTheory
-{	$Z_1=-0.0419126$(Murder - $\overline{\mbox{Murder}})-0.9991213$(Assault-$\overline{\mbox{Assault}})$
-	\newline
-	\newline
-$\phi_{11} = - 0.00419126$ and $\phi_{21} = -0.9991213$ are the \textit{principal component loadings}
-\newline
-\newline
-The idea is that every that out of every linear combination of Murder and Assault sucht that% 
-$$\phi_{11}^2+\phi_{21}^2 = 1$$
-and \vfill
-$$Var(\phi_{11})(\mbox{Murder}-\overline{\mbox{Murder}})+\phi_{21}(\mbox{Assault}-\overline{\mbox{Assault}})$$
-is maximized. 
-\newline
-\newline
-{\color{blue}prcomp()} centers the variables to have mean zero. This corresponds to how the first principal component is defined.
-\newline
-\newline
-$z_{i1}=-0.0419126$(Murder - $\overline{\mbox{Murder}})-0.9991213$(Assault-$\overline{\mbox{Assault}})$
-\newline
-\newline
-The values of $z_{i1},...,z_{n1}$ are known as \textit{principal component scores}, seen in the right-hand panel in Figure 6. $z_{i1} > 0$ indicates a state with below-average arrests for murder and below average for assault. A negative score suggests the opposite.
-\newline
-\newline
-	$Z_2=0.9991213$(Murder - $\overline{\mbox{Murder}})-0.0419126$(Assault-$\overline{\mbox{Assault}})$
- }
+% \begin{figure}[H]\centering
+% \begin{minipage}[c]{0.5\textwidth}
+% 	\includegraphics[width=1\linewidth]{images/USArrests_PCA.png}
+% \end{minipage}\hfill
+% \begin{minipage}[c]{0.5\textwidth}
+% 	\includegraphics[width=1\linewidth]{images/USArrests_PCA2.png}
+% \end{minipage}\hfill
+% \begin{minipage}[t]{.5\textwidth}
+% 	\subcaption{The data vary the most along the first principal component}
+% \end{minipage}\hfill
+% \begin{minipage}[t]{.5\textwidth}
+% 	\subcaption{Counter Clockwise Rotation that 1. PC coincides with x-axis}
+% \end{minipage}
+% \caption{1st and 2nd Principal Component}
+% \end{figure}
+% 
+% \begin{figure}[H]\centering
+% 	\begin{minipage}[c]{0.5\textwidth}
+% 		\includegraphics[width=1\linewidth]{images/USArrests_PCA3.png}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[c]{0.5\textwidth}
+% 		\includegraphics[width=1\linewidth]{images/USArrests_PCA4.png}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[t]{.5\textwidth}
+% 		\subcaption{$z_{i1}$ versus Murder}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[t]{.5\textwidth}
+% 		\subcaption{$z_{i1}$ versus Assault}
+% 	\end{minipage}
+% \end{figure}
+% 
+% \begin{figure}[H]\centering
+% 	\begin{minipage}[c]{0.5\textwidth}
+% 		\includegraphics[width=1\linewidth]{images/USArrests_PCA5.png}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[c]{0.5\textwidth}
+% 		\includegraphics[width=1\linewidth]{images/USArrests_PCA6.png}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[t]{.5\textwidth}
+% 		\subcaption{$z_{i2}$ versus Murder}
+% 	\end{minipage}\hfill
+% 	\begin{minipage}[t]{.5\textwidth}
+% 		\subcaption{$z_{i2}$ versus Assault}
+% 	\end{minipage}
+% \caption{The fact that the 2nd principal component scores are much closer to zero indicates that this component captures far less information as the 1st principal component.}
+% \end{figure}
+	\RTheory
+	{	
+		The idea is that every that out of every linear combination of Murder and Assault sucht that% 
+		$$\phi_{11}^2+\phi_{21}^2 = 1$$
+		and \vfill
+		$$Var(\phi_{11})(\mbox{Murder}-\overline{\mbox{Murder}})+\phi_{21}(\mbox{Assault}-\overline{\mbox{Assault}})$$
+		is maximized. 
+		\newline
+		{\color{blue}prcomp()} centers the variables to have mean zero. This corresponds to how the first principal component is defined.
+		\newline
+		\newline
+		The values of $z_{i1},...,z_{n1}$ are known as \textit{principal component scores}, seen in the right-hand panel in Figure 6. $z_{i1} > 0$ indicates a state with below-average arrests for murder and below average for assault. A negative score suggests the opposite.
+		\newline
+		\newline
+ 	}
 	{sections/ProbabilityStatistics/JointDistributions/RCode/USArrests_prcomp.R}
 
 	With two-dimensional data, such as in our USArrests example, we can construct at most two principal components. However, if we had other variables, such as Rape, then additional components could be constructed.
@@ -279,17 +269,17 @@ The values of $z_{i1},...,z_{n1}$ are known as \textit{principal component score
 	\paragraph{Proportion of Variance Explained by Principal Components}
 	\RTheory
 	{
-	There is an information loss of the given data by projecting the observations onto the first few principal components. Therefore we want to know the \textit{proportion of variance explained (PVE)}. The \textit{total variance} is defined as
+	\textit{total variance}
 	$$
 	\sum\limits_{j=1}\limits^{p} Var(X_j)=\sum\limits_{j=1}\limits^{p}\frac{1}{n}\sum\limits_{i=1}\limits^{n}x_{ij}^2
 	$$	
-	and the variance of the $m$th principal component is
+	Variance of the $m$th principal component
 	$$
 	\frac{1}{n}\sum\limits_{i=1}\limits^{n}z_{im}^2=\frac{1}{n}\sum\limits_{i=1}\limits^{n}\bigg(\sum\limits_{j=1}\limits^{p}\phi_{jm}x_{ij}\bigg)^2
 	$$
-	Therefore the PVE by the $m$th principal component is given by
+	\textit{Proportion of variance explained} by the $m$th principal component
 	$$
-\frac{\sum\limits_{i=1}\limits^{n}\bigg(\sum\limits_{j=1}\limits^{p}\phi_{jm}x_{ij}\bigg)^2}{\sum\limits_{j=1}\limits^{p}\sum\limits_{i=1}\limits^{n}x_{ij}^2}
+		\frac{\sum\limits_{i=1}\limits^{n}\bigg(\sum\limits_{j=1}\limits^{p}\phi_{jm}x_{ij}\bigg)^2}{\sum\limits_{j=1}\limits^{p}\sum\limits_{i=1}\limits^{n}x_{ij}^2}
 	$$
 	}
 	{sections/ProbabilityStatistics/JointDistributions/RCode/USArrests_pve.R}

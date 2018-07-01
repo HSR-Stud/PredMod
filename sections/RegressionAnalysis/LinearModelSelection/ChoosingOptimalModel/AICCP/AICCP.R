@@ -12,16 +12,6 @@ step(f.empty, direction="forward", scope=list(lower=f.empty, upper=f.full))
 ##
 ## Df Sum of Sq RSS AIC
 ## + Rating 1 62904790 21435122 4359.6
-## + Limit 1 62624255 21715657 4364.8
-## + Income 1 18131167 66208745 4810.7
-## + Student 1 5658372 78681540 4879.8
-## + Cards 1 630416 83709496 4904.6
-## <none> 84339912 4905.6
-## + Gender 1 38892 84301020 4907.4
-## + Education 1 5481 84334431 4907.5
-## + Married 1 2715 84337197 4907.5
-## + Age 1 284 84339628 4907.6
-## + Ethnicity 2 18454 84321458 4909.5
 ##
 ##  ...blablablabla...
 ##

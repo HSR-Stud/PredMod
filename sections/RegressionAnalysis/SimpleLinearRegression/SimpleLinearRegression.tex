@@ -6,13 +6,63 @@
 
 \subsubsection{Estimating the Coefficients}
 
-\RTheory
-	{Estimation of response variable $Y$ based on a predictor variable $X$.%
-	$$ Y \simeq \beta_0 + \beta_1X$$}
-	{sections/RegressionAnalysis/SimpleLinearRegression/EstimatingCoefficients/theoryCode.R}
-
-
 \RExample
 	{sections/RegressionAnalysis/SimpleLinearRegression/EstimatingCoefficients/exampleCode.R}
 	{sections/RegressionAnalysis/SimpleLinearRegression/EstimatingCoefficients/output.R}
-	{\todo{interpretation here}}
+	{	
+		\begin{minipage}{\linewidth}
+			\begin{table}[H]\centering
+				\begin{tabular}{|p{0.2\linewidth}|p{0.7\linewidth}|}
+					\hline
+					\multicolumn{2}{|l|}{\textbf{Intercept}}\\
+					\hline
+					Estimate 
+						& $\mu(\beta_0) = 7.03$\\
+					Std. Error
+						& $se(\beta_0) = 0.46$\\
+					Confidence interval
+						& $\beta_0 \pm 2\cdot se(\beta_0)$\\
+					t value
+						& $\frac{\mu(\beta_0)}{se(\beta_0)} = 15.36$\\
+					Pr($>|t|$)
+						& Probability of observing a value of the test statistic at least as large as the returned $t$-value. Reject the null hypothesis if this value is $<\alpha$\\
+						& $<2e-16$, this coefficient is significant\\
+					\hline
+					\multicolumn{2}{|l|}{\textbf{TV-coefficient}}\\
+					\hline
+					Estimate
+						& $\mu(\beta_1) = 0.048$\\
+					Std. Error
+						& $se(\beta_1) = 0.0027$\\
+					Confidence interval
+						& $\beta_1 \pm 2\cdot se(\beta_1)$\\
+					t value
+						& $ \frac{\mu(\beta_1)}{se(\beta_1)} = 17.67$\\
+					Pr($>|t|$)
+						& Probability of observing a value of the test statistic at least as large as the returned $t$-value. Reject the null hypothesis if this value is $<\alpha$\\
+						& $<2e-16$, this coefficient is significant\\
+					\hline
+					\multicolumn{2}{|l|}{\textbf{Analysis of the full model}}\\
+					\hline
+					Residual standard error
+						& Estimation of the standard deviation of the error term, 3.259 \\
+					Multiple R-Squared
+						& Indicates how much of the variability of the data is explained by the model, 0.6119 \\
+					Adjusted R-Squared
+						& Values close to $1$: A large part of the variance of the data is explained by the model.\\
+						& Values close to $0$: Little of the variance of the data is explained by the model.\\
+						& 0.6099 \\
+					F-Statistic
+						& Values close to $1$: There is no relationship between response and predictors.\\
+						& Values greater than $1$: There is a relationship between response and predictors.\\
+						& $H_0:$ all coefficients are zero, $H_A:$ at least one of the coefficients is non-zero\\
+						& $\frac{(\mathrm{TSS}-\mathrm{RSS})\cdot (n-p-1)}{\mathrm{RSS}\cdot p} = 312.1$\\
+					p-value (of the F-statistic)
+						& $<2.2e-16$, the null hypothesis can be rejected, at least one of the coefficients is non-zero\\
+					Degrees of freedom
+						& Number of training samples - number of estimated coefficients, 198 (200 training samples in this case)\\					
+					\hline
+				\end{tabular}
+			\end{table}
+		\end{minipage}
+	}

@@ -7,4 +7,4 @@ anova(lm(sales ~ TV + radio, data=Advertising), lm(sales ~ TV + radio + newspape
 anova(lm(sales ~ radio + newspaper, data=Advertising), lm(sales ~ TV + radio + newspaper, data=Advertising))
  
  # Third test, using drop1()
- anova(lm(sales ~ radio + newspaper, data=Advertising), lm(sales ~ TV + radio + newspaper, data=Advertising))
+ drop1(lm(sales ~ TV + radio + newspaper, data=Advertising), test="F")
